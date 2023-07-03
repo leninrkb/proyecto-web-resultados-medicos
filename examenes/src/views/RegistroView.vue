@@ -3,21 +3,21 @@
         <Toolbar :datos=datos></Toolbar>
         <br>
         <div class="p-3 text-gray-400">
-            HOME
-            - portada de bienvenida
+            Registro
+            - form de registro
         </div>
     </div>
 </template>
 <script>
 import Toolbar from '@/components/ui/Toolbar.vue';
-import {registro} from '../variables/rutas';
+import {home} from '../variables/rutas';
 export default {
-    name: 'HomeView',
+    name:'RegistroView',
     components:{
         Toolbar
     },
-    data(){
-        return{
+    data() {
+        return {
             datos:{
                 titulo:'Biolab',
                 enlaces:[
@@ -25,16 +25,12 @@ export default {
                 ],
                 primarios:[
                     {
-                        titulo:'Registrarse',
-                        ruta: registro
-                    },
-                    {
-                        titulo:'Iniciar Sesion',
-                        ruta: registro
+                        titulo:'Regresar',
+                        ruta: home
                     }
                 ]
             }
         }
-    }
+    },
 }
 </script>

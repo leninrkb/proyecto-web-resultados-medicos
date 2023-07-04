@@ -3,16 +3,16 @@
         <Toolbar :datos=datos></Toolbar>
         <br>
         <div class="p-3 text-gray-400">
-            HOME
-            - portada de bienvenida
+            Login
+            - login
         </div>
     </div>
 </template>
 <script>
 import Toolbar from '@/components/ui/Toolbar.vue';
-import {registro, examenes_disponibles, login} from '../variables/rutas';
+import {registro, examenes_disponibles, home} from '../variables/rutas';
 export default {
-    name: 'HomeView',
+    name: 'LoginView',
     components:{
         Toolbar
     },
@@ -32,8 +32,8 @@ export default {
                         ruta: registro
                     },
                     {
-                        titulo:'Iniciar Sesion',
-                        ruta: login
+                        titulo:'Regresar',
+                        ruta: home
                     }
                 ]
             }

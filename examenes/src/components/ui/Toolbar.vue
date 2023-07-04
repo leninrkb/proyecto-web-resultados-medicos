@@ -13,7 +13,7 @@
                     animation ease-in-out duration-150 
                     hover:translate-y-1 hover:shadow-none hover:text-black" 
                     v-for="(item, index) in datos.enlaces" :key="index">
-                        {{item}}
+                        <router-link :to="item.ruta">{{item.titulo}}</router-link>
                     </li>
                 </ul>
             </nav>

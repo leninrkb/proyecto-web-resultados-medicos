@@ -3,16 +3,16 @@
         <Toolbar :datos=datos></Toolbar>
         <br>
         <div class="p-3 text-gray-400">
-            Registro
-            - form de registro
+            Examenes disponibles
+            - tabla con los examenes disponibles
         </div>
     </div>
 </template>
 <script>
 import Toolbar from '@/components/ui/Toolbar.vue';
-import { home, examenes_disponibles, login } from '../variables/rutas';
+import { registro, login } from '../variables/rutas';
 export default {
-    name: 'RegistroView',
+    name: 'ExamenesView',
     components: {
         Toolbar
     },
@@ -20,21 +20,16 @@ export default {
         return {
             datos: {
                 titulo: 'Biolab',
-                enlaces: [
-                    {
-                        titulo: 'Examenes',
-                        ruta: examenes_disponibles
-                    }
-                ],
+                enlaces: [  ],
                 primarios: [
+                    {
+                        titulo: 'Registrarse',
+                        ruta: registro
+                    },
                     {
                         titulo: 'Iniciar Sesion',
                         ruta: login
                     },
-                    {
-                        titulo: 'Regresar',
-                        ruta: home
-                    }
                 ]
             }
         }

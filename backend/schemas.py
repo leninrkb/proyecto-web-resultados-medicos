@@ -37,3 +37,14 @@ class GeneroSchema(BaseModel):
 class RequestGenero(BaseModel):
     parameter: GeneroSchema = Field(...)
 
+
+########## rol de usuario
+class RolUsuarioSchema(BaseModel):
+    id: int
+    rol: str
+    descripcion: str
+    class Config:
+        orm_mode = True
+class RequestRolUsuario(BaseModel):
+    parameter: RolUsuarioSchema = Field(...)
+

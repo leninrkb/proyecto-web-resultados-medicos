@@ -16,3 +16,9 @@ class Genero(Base):
     __tablename__ = 'genero'
     id = Column(Integer, primary_key=True, index=True)
     genero = Column(String)
+
+class RolUsuario(Base):
+    __tablename__ = 'rol_usuario'
+    id = Column(Integer, primary_key=True, index=True)
+    rol = Column(String)
+    descripcion = Column(String)

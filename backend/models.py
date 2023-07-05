@@ -1,7 +1,7 @@
 from sqlalchemy import DATE, Column, Integer, String
 from config import Base, engine
 
-class PersonaModel(Base):
+class Persona(Base):
     __tablename__ = 'persona'
     id = Column(Integer, primary_key=True, index=True)
     cedula = Column(String)

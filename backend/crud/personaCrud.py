@@ -1,15 +1,15 @@
 from sqlalchemy.orm import Session
 from schemas import PersonaSchema
-from models import PersonaModel
+from models import Persona
 
 def getPersonas(db:Session, skip:int=0, limit:int=100):
-    return db.query(PersonaModel).offset(skip).limit(limit).all()
+    return db.query(Persona).offset(skip).limit(limit).all()
 
 def getPersonaId(db:Session, id:int):
-    return db.query(PersonaModel).filter(PersonaModel.id == id).first()
+    return db.query(Persona).filter(Persona.id == id).first()
 
 def createPersona(db:Session, persona:PersonaSchema):
-    _persona = PersonaModel(
+    _persona = Persona(
         cedula = persona.cedula,
         nombres = persona.nombres,
         apellidos = persona.apellidos,

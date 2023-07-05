@@ -11,6 +11,7 @@ create table persona(
 	fecha_nacimiento date not null,
 	id_genero integer not null,
 	constraint fk_id_genero foreign key (id_genero) references genero(id)
+    constraint uk_cedula unique (cedula)
 );
 
 create table rol_usuario(
@@ -28,5 +29,6 @@ create table usuario(
 	id_rol integer  not null,
 	constraint uk_usuario unique (usuario),
 	constraint fk_id_rol foreign key (id_rol) references rol_usuario(id)
+    constraint fk_id_persona foreign key (id_persona) references persona(id)
 );
 

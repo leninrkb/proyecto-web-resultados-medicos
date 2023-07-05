@@ -1,20 +1,20 @@
 from fastapi import APIRouter, HTTPException ,Path, Depends
-from config import SessionLocal
+from config import getDB
 from sqlalchemy.orm import Session
-from schemas import RequestPersona, Response
+from schemas import RequestGenero, Response
 from crud import personaCrud as crud
 
 router_persona = APIRouter()
 
-def getDB():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+# def getDB():
+#     db = SessionLocal()
+#     try:
+#         yield db
+#     finally:
+#         db.close()
 
 @router_persona.post('/create')
-async def createPersona(request:RequestPersona, db:Session=Depends(getDB)):
+async def createPersona(request:RequestGenero, db:Session=Depends(getDB)):
     _persona = crud.createPersona(db, request.parameter)
     return Response(code=200, status='ok', message='se ha creado una persona', result=_persona).dict(exclude_none=True)
 
@@ -29,7 +29,7 @@ async def getPersonaId(id:int, db:Session=Depends(getDB)):
     return Response(code=200, status='ok', message='se trajo una persona', result=_persona).dict(exclude_none=True)
 
 @router_persona.post('/update')
-async def updatePersona(request:RequestPersona, db:Session=Depends(getDB)):
+async def updatePersona(request:RequestGenero, db:Session=Depends(getDB)):
     _persona = crud.updatePersona(db, request.parameter)
     return Response(code=200, status='ok', message='se actualizo una persona', result=_persona).dict(exclude_none=True)
 

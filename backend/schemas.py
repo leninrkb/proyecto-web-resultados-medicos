@@ -24,6 +24,16 @@ class PersonaSchema(BaseModel):
     id_genero: int
     class Config:
         orm_mode = True
-class RequestPersona(BaseModel):
+class RequestGenero(BaseModel):
     parameter: PersonaSchema = Field(...)
+
+
+########## genero
+class GeneroSchema(BaseModel):
+    id: int
+    genero: str
+    class Config:
+        orm_mode = True
+class RequestGenero(BaseModel):
+    parameter: GeneroSchema = Field(...)
 

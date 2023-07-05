@@ -17,7 +17,7 @@ create table persona(
 create table rol_usuario(
 	id serial primary key,
 	rol varchar(50) not null,
-	descripcion varchar(50) not null,
+	descripcion varchar(200) not null,
 	constraint uk_descripcion unique(rol)
 );
 

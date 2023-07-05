@@ -1,6 +1,8 @@
 from sqlalchemy import DATE, Column, Integer, String
 from config import Base, engine
 
+Base.metadata.create_all(engine)
+
 class Persona(Base):
     __tablename__ = 'persona'
     id = Column(Integer, primary_key=True, index=True)
@@ -10,4 +12,7 @@ class Persona(Base):
     fecha_nacimiento = Column(DATE)
     id_genero = Column(Integer)
 
-Base.metadata.create_all(engine)
+class Genero(Base):
+    __tablename__ = 'genero'
+    id = Column(Integer, primary_key=True, index=True)
+    genero = Column(String)

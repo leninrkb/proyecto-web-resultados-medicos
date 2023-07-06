@@ -1,0 +1,1 @@
+export const arrows_rotate = require('../assets/arrows-rotate-solid.svg');

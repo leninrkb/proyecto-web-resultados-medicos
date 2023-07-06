@@ -48,3 +48,16 @@ class RolUsuarioSchema(BaseModel):
 class RequestRolUsuario(BaseModel):
     parameter: RolUsuarioSchema = Field(...)
 
+
+########## usuario
+class UsuarioSchema(BaseModel):
+    id: int
+    id_persona: int
+    id_rol: int
+    usuario: str
+    contrasena: str
+    class Config:
+        orm_mode = True
+class RequestUsuario(BaseModel):
+    parameter: UsuarioSchema = Field(...)
+

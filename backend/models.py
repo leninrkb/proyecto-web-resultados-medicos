@@ -22,3 +22,11 @@ class RolUsuario(Base):
     id = Column(Integer, primary_key=True, index=True)
     rol = Column(String)
     descripcion = Column(String)
+
+class Usuario(Base):
+    __tablename__ = 'usuario'
+    id = Column(Integer, primary_key=True, index=True)
+    id_persona = Column(Integer)
+    id_rol = Column(Integer)
+    usuario = Column(String)
+    contrasena = Column(String)

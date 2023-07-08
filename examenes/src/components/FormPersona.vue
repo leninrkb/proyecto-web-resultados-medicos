@@ -2,23 +2,19 @@
     <h2 class="font-bold">Registro</h2>
     <div class="grid grid-flow-dense grid-cols-3 grid-rows-10 gap-y-2">
         <label class="col-span-1 font-semibold" for="cedula">Cedula</label>
-        <input class="col-span-2 px-2 rounded-md" type="text" id="cedula" v-model="cedula">
+        <input class="col-span-2 px-2 rounded-md" type="text" id="cedula" v-model="cedula" @input="emitir_info">
 
         <label class="col-span-1 font-semibold" for="nombres">Nombres</label>
-        <input class="col-span-2 px-2 rounded-md" type="text" id="nombres" v-model="nombres">
+        <input class="col-span-2 px-2 rounded-md" type="text" id="nombres" v-model="nombres" @input="emitir_info">
 
         <label class="col-span-1 font-semibold" for="apellidos">Apellidos</label>
-        <input class="col-span-2 px-2 rounded-md" type="text" id="apellidos" v-model="apellidos">
+        <input class="col-span-2 px-2 rounded-md" type="text" id="apellidos" v-model="apellidos" @input="emitir_info">
  
         <label class="col-span-1 font-semibold" for="fecha">Fecha de nacimiento</label>
-        <input class="col-span-2 px-2 rounded-md" type="date" id="fecha" v-model="fecha_nacimiento">
+        <input class="col-span-2 px-2 rounded-md" type="date" id="fecha" v-model="fecha_nacimiento" @input="emitir_info">
 
         <label class="col-span-1 font-semibold" for="genero">genero</label>
-        <ComboGenero id="genero"  @id_genero="capturar_evento"></ComboGenero>
-    </div>
-    
-    <div class="flex flex-row-reverse gap-3">
-        <button class=" active:translate-x-3 animation ease-in-out duration-200 hover:bg-green-500 hover:text-gray-800  rounded-md p-2 bg-emerald-600 text-gray-200" @click="emitir_info">Siguiente</button>
+        <ComboGenero :id_genero_prop="id_genero"  @id_genero="capturar_evento"></ComboGenero>
     </div>
     <div v-if="mostrar_errores" class="w-60 mx-auto my-3 text-red-700 font-semibold">
         <p class="break-before-all">{{errores}}</p>
@@ -28,23 +24,47 @@
 import ComboGenero from './ComboGenero.vue';
 export default {
     name: 'FormPersona',
+    props:{
+        datos:{
+            type: Object,
+            required: false
+        }
+    },
+    beforeMount() {
+        this.cargar_datos();
+    },
     components:{
         ComboGenero
     },
     data() {
         return {
-            cedula:'',
-            nombres:'',
-            apellidos:'',
-            fecha_nacimiento:'',
-            id_genero:3,
-            mostrar_errores:false,
-            errores:''
+            id: 0,
+            cedula: '',
+            nombres: '',
+            apellidos: '',
+            fecha_nacimiento: '',
+            id_genero: 1,
+            mostrar_errores: false,
+            errores: ''
         }
     },
     methods: {
+        cargar_datos(){
+            if(this.datos !== undefined){
+                try {
+                    this.id = this.datos.id ?? 0;
+                    this.cedula = this.datos.cedula ?? '';
+                    this.nombres = this.datos.nombres ?? '';
+                    this.apellidos = this.datos.apellidos ?? '';
+                    this.fecha_nacimiento = this.datos.fecha_nacimiento ?? '';
+                    this.id_genero = this.datos.id_genero ?? 1;
+                    this.emitir_info();
+                }catch{ }
+            }
+        },
         capturar_evento(valor){
             this.id_genero = valor;
+            this.emitir_info();
         },
         emitir_info(){
             let validado = this.valores_validos();
@@ -52,6 +72,7 @@ export default {
                 this.mostrar_errores = false;
                 this.errores = '';
                 let persona = {
+                    id: this.id,
                     cedula: this.cedula,
                     nombres: this.nombres,
                     apellidos: this.apellidos,

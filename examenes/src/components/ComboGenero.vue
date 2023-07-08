@@ -1,6 +1,6 @@
 <template lang="es">
     <select class="rounded-md" v-if="terminado" @change="emitir" v-model="id_genero">
-        <option :value="item.id" v-for="(item, index) in generos" :key="index">{{item.genero}}</option>
+        <option :value="item.id" v-for="(item, index) in generos" :key="index" :selected="item.id === id_genero">{{item.genero}}</option>
     </select>
     <div v-else class="w-6 h-6 animate-spin">
         <img :src="arrows_rotate" alt="arrows rotate">
@@ -19,7 +19,7 @@ export default {
         }
     },
     mounted() {
-        this.cargar_combo();
+        this.cargar_datos();
         this.emitir();
     },
     data() {
@@ -27,10 +27,18 @@ export default {
             terminado: false,
             arrows_rotate: arrows_rotate,
             generos:[],
-            id_genero: this.id_genero_prop == undefined ? 1 : this.id_genero_prop
+            id_genero: 1
         }
     },
     methods: {
+        cargar_datos(){
+            try {
+                if(this.id_genero_prop !== undefined){
+                    this.id_genero = this.id_genero_prop ?? 1;
+                }
+                this.cargar_combo();
+            } catch (error) { }
+        },
         cargar_combo(){
             this.terminado = false;
             axios.get(get_generos)

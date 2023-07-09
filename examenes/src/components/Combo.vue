@@ -1,6 +1,6 @@
 <template lang="es">
-    <select class="rounded-md" v-if="terminado" @change="emitir" v-model="id_genero">
-        <option :value="item.id" v-for="(item, index) in generos" :key="index" :selected="item.id === id_genero">{{item.genero}}</option>
+    <select class="rounded-md" v-if="terminado" @change="emitir" v-model="id_seleccionado">
+        <option :value="item.id" v-for="(item, index) in lista" :key="index" :selected="item.id === id_seleccionado">{{item.valor}}</option>
     </select>
     <div v-else class="w-6 h-6 animate-spin">
         <img :src="arrows_rotate" alt="arrows rotate">
@@ -8,14 +8,17 @@
 </template>
 <script>
 import axios from 'axios';
-import { get_generos } from "../variables/rutas";
 import { arrows_rotate } from "../variables/svg";
 export default {
-    name:'ComboGenero',
+    name:'Combo',
     props:{
-        id_genero_prop:{
+        id_prop:{
             type: Number,
             required: false
+        },
+        peticion:{
+            type: String,
+            required: true
         }
     },
     mounted() {
@@ -26,25 +29,29 @@ export default {
         return {
             terminado: false,
             arrows_rotate: arrows_rotate,
-            generos:[],
-            id_genero: 1
+            lista:[],
+            id_seleccionado: 1
         }
     },
     methods: {
         cargar_datos(){
             try {
-                if(this.id_genero_prop !== undefined){
-                    this.id_genero = this.id_genero_prop ?? 1;
+                if(this.id_prop !== undefined){
+                    this.id_seleccionado = this.id_prop ?? 1;
                 }
                 this.cargar_combo();
             } catch (error) { }
         },
         cargar_combo(){
             this.terminado = false;
-            axios.get(get_generos)
+            axios.get(this.peticion)
             .then(resp => {
+                let keys = Object.keys(resp.data.result[0]);
                 resp.data.result.forEach(element => {
-                    this.generos.push(element);
+                    this.lista.push({
+                        id: element[keys[0]],
+                        valor: element[keys[1]]
+                    });
                 });
                 this.terminado = true;
             })
@@ -53,7 +60,7 @@ export default {
             });
         },
         emitir(){
-            this.$emit('id_genero',this.id_genero);
+            this.$emit('emitido',this.id_seleccionado);
         }
     },
 }

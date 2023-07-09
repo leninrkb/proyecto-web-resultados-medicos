@@ -6,13 +6,6 @@ from crud import personaCrud as crud
 
 router_persona = APIRouter()
 
-# def getDB():
-#     db = SessionLocal()
-#     try:
-#         yield db
-#     finally:
-#         db.close()
-
 @router_persona.post('/create')
 async def createPersona(request:RequestPersona, db:Session=Depends(getDB)):
     _persona = crud.createPersona(db, request.parameter)

@@ -12,7 +12,8 @@
                 <br>
                 <hr>
                 <br>
-                <FormUsuario :datos="datos_usuario" @emitido="capturar_usuario"></FormUsuario>
+                <FormUsuario rol_visible="true" @emitido="capturar_usuario"></FormUsuario>
+                <br>
                 <div  class="flex flex-row-reverse gap-3">
                     <button v-if="!cargando" class=" active:translate-x-3 animation ease-in-out duration-200 hover:bg-green-500 hover:text-gray-800  rounded-md p-2 bg-emerald-600 text-gray-200" @click="crear_persona">Siguiente</button>
                     <img v-else class="w-6 h-6 animate-spin" :src="arrows_rotate" alt="arrows rotate">
@@ -79,7 +80,7 @@ export default {
             datos_usuario: {
                 id: 0,
                 id_persona: 0,
-                id_rol: 0,
+                id_rol: 2,
                 usuario: '',
                 contrasena: ''
             },

@@ -30,3 +30,9 @@ async def update_usuario(request:RequestUsuario, db:Session=Depends(getDB)):
 async def delete_usuario(id:int, db:Session=Depends(getDB)):
     crud.delete(db, id)
     return Response(code=200, status='ok', message='se elimino un usuario').dict(exclude_none=True)
+
+
+@router_usuario.post('/autenticar')
+async def autenticar_usuario(request:RequestUsuario, db:Session=Depends(getDB)):
+    _usuario = crud.autenticar(db, request.parameter)
+    return Response(code=200, status='ok', message='autenticado', result=_usuario).dict(exclude_none=True)

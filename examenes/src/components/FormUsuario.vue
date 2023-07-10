@@ -6,8 +6,8 @@
         <label class="col-span-1 font-semibold" for="contrasena">contrasena</label>
         <input class="col-span-2 px-2 rounded-md" type="password" id="contrasena" v-model="contrasena" @input="emitir_datos">
 
-        <label class="col-span-1 font-semibold" for="rol">rol</label>
-        <Combo disabled="true" id_prop="2" @emitido="capturar_valor" :peticion="get_roles_usuarios"></Combo>
+        <label v-if="_rol_visible" class="col-span-1 font-semibold" for="rol">rol</label>
+        <Combo v-if="_rol_visible" :id_prop="id_rol" @emitido="capturar_valor" :peticion="get_roles_usuarios"></Combo>
     </div>
     <div v-if="mostrar_errores" class="w-80 mx-auto my-3 text-red-700 font-semibold">
         <p class="break-before-all">{{errores}}</p>
@@ -21,7 +21,11 @@ export default {
     props:{
         datos:{
             type: Object,
-            requred: true
+            requred: false
+        },
+        rol_visible:{
+            type: Boolean,
+            required: false
         }
     },
     components: {
@@ -37,17 +41,19 @@ export default {
             id_persona: 0,
             usuario: '',
             contrasena: '',
-            id_rol: 0,
+            id_rol: 2,
             mostrar_errores: false,
             errores: '',
+            _rol_visible: false
         }
     },
     methods: {
         cargar_datos(){
             try {
+                this._rol_visible = this.rol_visible ?? false;
                 this.id = this.datos.id ?? 0;
                 this.id_persona = this.datos.id_persona ?? 0;
-                this.id_rol = this.datos.id_rol ?? 0;
+                this.id_rol = this.datos.id_rol ?? 2;
                 this.usuario = this.datos.usuario ?? '';
                 this.contrasena = this.datos.contrasena ?? '';
                 this.emitir_datos();
@@ -57,6 +63,7 @@ export default {
         },
         capturar_valor(id) {
             this.id_rol = id;
+            this.emitir_datos();
         },
         emitir_datos(){
             let validado = this.valores_validos();

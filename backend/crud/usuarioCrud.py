@@ -34,4 +34,11 @@ def update(db:Session, usuario:UsuarioSchema):
     db.refresh(_usuario)
     return _usuario
 
+def autenticar(db:Session, usuario:UsuarioSchema):
+    _usuario = db.query(Usuario).filter(Usuario.usuario == usuario.usuario).first()
+    if not _usuario == None:
+        if _usuario.contrasena == usuario.contrasena:
+            return _usuario
+    return False
+
 

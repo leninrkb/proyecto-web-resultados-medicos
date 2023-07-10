@@ -143,6 +143,7 @@ export default {
                 this.mensaje = 'se ha registrado el usuario';
                 this.usuario_creado = true;
                 this.cargando = false;
+                this.$router.push(login);
             })
             .catch(error => {
                 this.cargando = false;

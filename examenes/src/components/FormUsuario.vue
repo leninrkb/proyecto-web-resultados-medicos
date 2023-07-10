@@ -80,15 +80,15 @@ export default {
         },
         valores_validos(){
             let mensaje = '';
-            let regex_contrasena = /^.{8}$/;
-            let regex_usuario = /^.{5,}$/;
+            let regex_contrasena = /^.{4,}$/;
+            let regex_usuario = /^.{3,}$/;
             this.usuario = this.usuario.replace(/\s/g, '');
             this.contrasena = this.contrasena.replace(/\s/g, '');
             if(!regex_usuario.test(this.usuario)){
-                mensaje += 'Usuario debe tener al menos 5 caracteres. '
+                mensaje += 'Usuario debe tener al menos 3 caracteres. '
             }
             if(!regex_contrasena.test(this.contrasena)){
-                mensaje += 'Su contrasena debe tener 8 caracteres. '
+                mensaje += 'Su contrasena debe tener al menos 4 caracteres. '
             }
             if(mensaje === ''){
                 return true;

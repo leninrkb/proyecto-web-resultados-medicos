@@ -1,13 +1,13 @@
 from fastapi import APIRouter, Depends
 from config import getDB
 from sqlalchemy.orm import Session
-from schemas import RequestGenero, Response
-from crud import generoCrud as crud
+from schemas import RequestExamen, Response
+from crud import examenCrud as crud
 
 router_genero = APIRouter()
 
 @router_genero.post('/create')
-async def create_genero(request:RequestGenero, db:Session=Depends(getDB)):
+async def create_genero(request:RequestExamen, db:Session=Depends(getDB)):
     _genero = crud.create_genero(db, request.parameter)
     return Response(code=200, status='ok', message='se ha creado un genero', result=_genero).dict(exclude_none=True)
 
@@ -22,7 +22,7 @@ async def get_genero_id(id:int, db:Session=Depends(getDB)):
     return Response(code=200, status='ok', message='se trajo una genero', result=_genero).dict(exclude_none=True)
 
 @router_genero.post('/update')
-async def update_genero(request:RequestGenero, db:Session=Depends(getDB)):
+async def update_genero(request:RequestExamen, db:Session=Depends(getDB)):
     _genero = crud.update_genero(db, request.parameter)
     return Response(code=200, status='ok', message='se actualizo una genero', result=_genero).dict(exclude_none=True)
 

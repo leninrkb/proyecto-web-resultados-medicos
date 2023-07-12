@@ -11,11 +11,10 @@ export const datos_toolbar_inicio = {
             titulo: 'Examenes',
             ruta: examenes_pacientes
         },
-    ],
-    primarios: [
         {
-            titulo: 'Otros',
-            ruta: ''
-        }
-    ]
+            titulo: 'Pacientes',
+            ruta: examenes_pacientes
+        },
+    ],
+    primarios: [ ]
 }

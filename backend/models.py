@@ -12,7 +12,7 @@ class Persona(Base):
     fecha_nacimiento = Column(DATE)
     id_genero = Column(Integer)
 
-class Genero(Base):
+class Examen(Base):
     __tablename__ = 'genero'
     id = Column(Integer, primary_key=True, index=True)
     genero = Column(String)
@@ -30,3 +30,14 @@ class Usuario(Base):
     id_rol = Column(Integer)
     usuario = Column(String)
     contrasena = Column(String)
+
+class Examen(Base):
+    __tablename__ = 'examen'
+    id = Column(Integer, primary_key=True, index=True)
+    id_institucion = Column(Integer)
+    id_persona = Column(Integer)
+    id_estado = Column(Integer)
+    examen = Column(String)
+    motivo = Column(String)
+    fecha_realiza = Column(DATE)
+    observacion = Column(String)

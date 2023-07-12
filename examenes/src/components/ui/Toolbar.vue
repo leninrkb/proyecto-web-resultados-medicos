@@ -8,7 +8,7 @@
         </h1>
         <div class="grow">
             <nav>
-                <ul class='flex gap-3 text-sky-800'>
+                <ul class='flex gap-3 text-sky-950'>
                     <li class="shadow-md rounded-lg p-2 
                     animation ease-in-out duration-150 
                     hover:translate-y-1 hover:shadow-none hover:text-black" 

@@ -30,6 +30,7 @@ import Card from '@/components/ui/Card.vue';
 import { arrows_rotate } from "../variables/svg";
 import { autenticar } from '../variables/rutas';
 import axios from 'axios';
+import { sesion } from '../variables/sesion';
 
 export default {
     name: 'LoginView',
@@ -62,7 +63,8 @@ export default {
             usuario_capturado: undefined,
             cargando: false,
             arrows_rotate: arrows_rotate,
-            mensaje:''
+            mensaje:'',
+            sesion: sesion()
         }
     },
     methods: {
@@ -96,6 +98,7 @@ export default {
         },
         validar_tipo_usuario(usuario){
             if(usuario.id_rol == 1){
+                this.sesion.nuevaSesion(usuario);
                 this.$router.push(inicio_admin);
             }else if(usuario.id_rol == 2){
                 console.log('entra paciente');

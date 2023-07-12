@@ -4,6 +4,7 @@ import RegistroView from '../views/RegistroView.vue'
 import ExamenesView from '../views/ExamenesView.vue'
 import LoginView from '../views/LoginView.vue'
 import InicioView from '../views/admin/InicioView.vue'
+import ExamenesPacientes from '../views/admin/ExamenesPacientes.vue'
 
 const routes = [
   {
@@ -29,7 +30,14 @@ const routes = [
   {
     path: '/inicio',
     name: 'inicio',
-    component: InicioView
+    component: InicioView,
+    children:[
+      {
+        path:'examenes',
+        name:'examenes',
+        component: ExamenesPacientes
+      },
+    ]
   },
 ]
 

@@ -7,7 +7,8 @@
              p-1 rounded-md"
              @click="terminar_sesion"> Terminar sesion </button>
         </div>
-        inicio admin
+        <br>
+        <router-view></router-view>
     </div>
 </template>
 <script>

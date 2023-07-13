@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from config import getDB
 from sqlalchemy.orm import Session
 from schemas import RequestExamen, Response
-from crud import examenCrud as crud
+from crud import generoCrud as crud
 
 router_genero = APIRouter()
 

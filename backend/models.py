@@ -12,7 +12,7 @@ class Persona(Base):
     fecha_nacimiento = Column(DATE)
     id_genero = Column(Integer)
 
-class Examen(Base):
+class Genero(Base):
     __tablename__ = 'genero'
     id = Column(Integer, primary_key=True, index=True)
     genero = Column(String)

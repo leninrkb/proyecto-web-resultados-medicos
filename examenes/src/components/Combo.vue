@@ -49,8 +49,8 @@ export default {
                 let keys = Object.keys(resp.data.result[0]);
                 resp.data.result.forEach(element => {
                     this.lista.push({
-                        id: element[keys[0]],
-                        valor: element[keys[1]]
+                        id: element.id,
+                        valor: element[keys[0]]
                     });
                 });
                 this.terminado = true;

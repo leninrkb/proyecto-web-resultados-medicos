@@ -29,13 +29,13 @@ class RequestPersona(BaseModel):
 
 
 ########## genero
-class ExamenSchema(BaseModel):
+class GeneroSchema(BaseModel):
     id: int
     genero: str
     class Config:
         orm_mode = True
 class RequestExamen(BaseModel):
-    parameter: ExamenSchema = Field(...)
+    parameter: GeneroSchema = Field(...)
 
 
 ########## rol de usuario

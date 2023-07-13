@@ -115,3 +115,15 @@ class InstitucionSchema(BaseModel):
 class RequestInstitucion(BaseModel):
     parameter: InstitucionSchema = Field(...)
 
+########## detalle examen
+class DetalleExamenSchema(BaseModel):
+    id : int
+    id_examen : int
+    id_tipo : int
+    id_estado : int
+    resultado : str
+    observacion : str
+    class Config:
+        orm_mode = True
+class RequestDetalleExamen(BaseModel):
+    parameter: DetalleExamenSchema = Field(...)

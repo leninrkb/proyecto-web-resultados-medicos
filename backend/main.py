@@ -10,6 +10,7 @@ from router.examenRouter import router_examen
 from router.estadoExamenRouter import router_estado_examen
 from router.tipoExamenRouter import router_tipo_examen
 from router.institucionRouter import router_institucion
+from router.detalleExamenRouter import router_detalle
 
 
 app = FastAPI()
@@ -43,3 +44,4 @@ app.include_router(router_examen, prefix='/examen', tags=['examen'])
 app.include_router(router_estado_examen, prefix='/estado_examen', tags=['estado_examen'])
 app.include_router(router_tipo_examen, prefix='/tipo_examen', tags=['tipo_examen'])
 app.include_router(router_institucion, prefix='/institucion', tags=['institucion'])
+app.include_router(router_detalle, prefix='/detalle', tags=['detalle'])

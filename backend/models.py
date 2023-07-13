@@ -67,3 +67,13 @@ class Institucion(Base):
     descripcion = Column(String)
     ubicacion = Column(String)
     path_img = Column(String)
+
+
+class DetalleExamen(Base):
+    __tablename__ = 'detalle_examen'
+    id = Column(Integer, primary_key=True, index=True)
+    id_examen = Column(Integer)
+    id_tipo = Column(Integer)
+    id_estado = Column(Integer)
+    resultado = Column(String)
+    observacion = Column(String)

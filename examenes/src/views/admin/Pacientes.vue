@@ -6,7 +6,7 @@
 <script>
 import Tabla from '../../components/ui/Tabla.vue';
 import axios from 'axios';
-import { get_pacientes } from '../../variables/rutas';
+import { get_personas, get_generos } from '../../variables/rutas';
 export default {
     name:'Pacientes',
     components:{
@@ -15,27 +15,43 @@ export default {
     data() {
         return {
             pacientes:{titulos:undefined, registros:undefined},
-            termino_pacientes: false
+            termino_pacientes: false,
+            generos: undefined
         }
     },
     methods: {
-        cargar_pacientes(){
+        cargar_personas(){
             this.termino_pacientes = false;
             try {
-                axios.get(get_pacientes).then(resp => {
-                    this.pacientes.titulos = ['id','cedula','nombres','apellidos','fecha_nacimiento','id_genero'];
+                this.cargar_generos();
+                axios.get(get_personas).then(resp => {
+                    console.log(this.generos);
+                    this.pacientes.titulos = ['id','cedula','nombres','apellidos','fecha_nacimiento','genero'];
                     this.pacientes.registros = resp.data.result;
+                    this.pacientes.registros.forEach(element => {
+                        let genero_tmp = this.generos.find(genero => genero.id == element.id_genero);
+                        element.genero = genero_tmp.genero;
+                    });
                     this.termino_pacientes = true;
                 }).catch(error => {
                     this.termino_pacientes = true;
-                 });
+                });
             } catch (error) {
                 this.termino_pacientes = true;
+            }
+        },
+        cargar_generos(){
+            try {
+                axios.get(get_generos).then(resp => {
+                    this.generos = resp.data.result;
+                }).catch(error => { });
+            } catch (error) {
+                
             }
         }
     },
     mounted() {
-        this.cargar_pacientes();
+        this.cargar_personas();
     },
 }
 </script>

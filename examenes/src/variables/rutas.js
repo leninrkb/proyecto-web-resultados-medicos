@@ -18,4 +18,6 @@ export const delete_persona = 'http://127.0.0.1:8000/persona/delete/';
 export const autenticar = 'http://127.0.0.1:8000/usuario/autenticar/';
 export const get_examenes = 'http://127.0.0.1:8000/examen/get/';
 export const get_examen_id = 'http://127.0.0.1:8000/examen/get/';
-export const get_pacientes = 'http://127.0.0.1:8000/persona/get/';
+export const get_personas = 'http://127.0.0.1:8000/persona/get/';
+export const get_instituciones = 'http://127.0.0.1:8000/institucion/get/';
+export const get_estados = 'http://127.0.0.1:8000/estado_examen/get/';

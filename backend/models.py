@@ -1,4 +1,5 @@
-from sqlalchemy import DATE, Column, Integer, String
+from decimal import Decimal
+from sqlalchemy import DATE, Column, Integer, Numeric, String
 from config import Base, engine
 
 Base.metadata.create_all(engine)
@@ -41,3 +42,28 @@ class Examen(Base):
     motivo = Column(String)
     fecha_realiza = Column(DATE)
     observacion = Column(String)
+
+class EstadoExamen(Base):
+    __tablename__ = 'estado_examen'
+    id = Column(Integer, primary_key=True, index=True)
+    estado = Column(String)
+    descripcion = Column(String)
+
+
+class TipoExamen(Base):
+    __tablename__ = 'tipo_examen'
+    id = Column(Integer, primary_key=True, index=True)
+    tipo = Column(String)
+    referencia = Column(String)
+    descripcion = Column(String)
+    precio = Column(Numeric(7,2))
+
+
+class Institucion(Base):
+    __tablename__ = 'institucion'
+    id = Column(Integer, primary_key=True, index=True)
+    institucion = Column(String)
+    razon_social = Column(String)
+    descripcion = Column(String)
+    ubicacion = Column(String)
+    path_img = Column(String)

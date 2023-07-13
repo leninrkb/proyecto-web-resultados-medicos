@@ -78,3 +78,40 @@ class RequestExamen(BaseModel):
     parameter: ExamenSchema = Field(...)
 
 
+########## estado examen
+class EstadoExamenSchema(BaseModel):
+    id : int
+    estado : str
+    descripcion : str
+    class Config:
+        orm_mode = True
+class RequestEstadoExamen(BaseModel):
+    parameter: EstadoExamenSchema = Field(...)
+
+
+########## tipo examen
+class TipoExamenSchema(BaseModel):
+    id : int
+    tipo : str
+    referencia : str
+    descripcion : str
+    precio : float
+    class Config:
+        orm_mode = True
+class RequestTipoExamen(BaseModel):
+    parameter: TipoExamenSchema = Field(...)
+
+
+########## institucion
+class InstitucionSchema(BaseModel):
+    id : int
+    institucion : str
+    razon_social : str
+    descripcion : str
+    ubicacion : str
+    path_img : str
+    class Config:
+        orm_mode = True
+class RequestInstitucion(BaseModel):
+    parameter: InstitucionSchema = Field(...)
+

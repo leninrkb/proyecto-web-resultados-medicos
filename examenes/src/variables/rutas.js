@@ -6,6 +6,8 @@ export const login = '/login';
 // admin
 export const inicio_admin = '/inicio';
 export const examenes_pacientes = inicio_admin + '/examenes';
+export const disponibles = inicio_admin + '/disponibles';
+export const pacientes = inicio_admin + '/pacientes';
 
 //api
 export const get_generos = 'http://127.0.0.1:8000/genero/get';

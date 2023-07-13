@@ -5,6 +5,8 @@ import ExamenesView from '../views/ExamenesView.vue'
 import LoginView from '../views/LoginView.vue'
 import InicioView from '../views/admin/InicioView.vue'
 import ExamenesPacientes from '../views/admin/ExamenesPacientes.vue'
+import ExamenesDisponibles from '../views/admin/ExamenesDisponibles.vue'
+import Pacientes from '../views/admin/Pacientes.vue'
 
 const routes = [
   {
@@ -37,6 +39,16 @@ const routes = [
         name:'examenes',
         component: ExamenesPacientes
       },
+      {
+        path:'disponibles',
+        name:'disponibles',
+        component: ExamenesDisponibles
+      },
+      {
+        path:'pacientes',
+        name:'pacientes',
+        component: Pacientes
+      }
     ]
   },
 ]

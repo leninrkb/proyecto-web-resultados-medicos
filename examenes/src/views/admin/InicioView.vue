@@ -48,7 +48,7 @@ export default {
     
     
 }
-import { examenes_pacientes } from '../../variables/rutas';
+import { examenes_pacientes, disponibles, pacientes } from '../../variables/rutas';
 const datos_toolbar = {
     titulo: 'biolab',
     enlaces: [
@@ -58,11 +58,11 @@ const datos_toolbar = {
         },
         {
             titulo: 'Examenes',
-            ruta: examenes_pacientes
+            ruta: disponibles
         },
         {
             titulo: 'Pacientes',
-            ruta: examenes_pacientes
+            ruta: pacientes
         },
     ],
     primarios: [ ]

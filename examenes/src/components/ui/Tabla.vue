@@ -19,7 +19,7 @@
         <tbody class="divide-y divide-gray-700">
           <tr class="animation duration-200 hover:bg-gray-400 bg-gray-100 hover:cursor-pointer"
           v-for="(item, index) in registros" :key="index">
-            <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"
+            <td @click="emitir_fila(item)" class="whitespace-nowrap px-4 py-2 font-medium text-gray-900"
             v-for="(llave, index) in titulos" :key="index">{{item[llave]}}</td>
           </tr>
         </tbody>
@@ -53,7 +53,10 @@
               
           },
           emitir_evento(){
-            this.$emit('emitido',true);
+            this.$emit('recargar',true);
+          },
+          emitir_fila(fila){
+            this.$emit('fila',fila);
           }
       },
       beforeMount() {

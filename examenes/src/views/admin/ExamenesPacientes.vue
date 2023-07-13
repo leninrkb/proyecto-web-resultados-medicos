@@ -2,11 +2,12 @@
     <h3 class="text-gray-200 font-sans text-xl capitalize">Todos los examenes de los pacientes</h3>
     <br>
     <!--I  -->
-    <Tabla v-if="terminado" :datos="tabla_examenes" @emitido="emitido_tabla"></Tabla>
+    <Tabla v-if="terminado_examenes" :datos="tabla_examenes" @recargar="recargar" @fila="capturar_fila"></Tabla>
     <div v-else class="w-10 h-10 p-2 mx-auto animate-spin bg-gray-300 rounded-full">
         <img :src="arrows_rotate" alt="arrows rotate">
     </div>
     <!--F  -->
+
 
 </template>
 <script>
@@ -25,26 +26,29 @@ export default {
         return {
             tabla_examenes:{titulos:undefined, registros:undefined},
             arrows_rotate: arrows_rotate,
-            terminado: false
+            terminado_examenes: false
         }
     },
     methods: {
         traer_examenes() {
-            this.terminado = false;
+            this.terminado_examenes = false;
             try {
                 this.tabla_examenes.titulos = ['id', 'id_institucion', 'id_persona', 'id_estado', 'examen', 'motivo', 'fecha_realiza', 'observacion']
                 axios.get(get_examenes).then(resp => {
                     this.tabla_examenes.registros = resp.data.result;
-                    this.terminado = true;
+                    this.terminado_examenes = true;
                 }).catch(error => {
-                    this.terminado = true;
+                    this.terminado_examenes = true;
                 });
             } catch (error) {
-                this.terminado = true;
+                this.terminado_examenes = true;
             }
         },
-        emitido_tabla(){
+        recargar(){
             this.traer_examenes();
+        },
+        capturar_fila(fila){
+            console.log(fila);
         }
     },
     mounted() {

@@ -8,7 +8,7 @@
 </template>
 <script>
 import axios from 'axios';
-import { arrows_rotate } from "../variables/svg";
+import { arrows_rotate } from "../../variables/svg";
 export default {
     name:'Combo',
     props:{

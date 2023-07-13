@@ -15,7 +15,6 @@
 import { sesion } from '../../variables/sesion';
 import { home} from '../../variables/rutas';
 import Toolbar from '@/components/ui/Toolbar.vue';
-import { datos_toolbar_inicio } from './datos_toolbar';
 
 export default {
     name:'InicioView',
@@ -25,7 +24,7 @@ export default {
     data() {
         return {
             sesion: sesion(),
-            datos_toolbar: datos_toolbar_inicio
+            datos_toolbar: datos_toolbar
         }
     },
     methods: {
@@ -48,5 +47,24 @@ export default {
     },
     
     
+}
+import { examenes_pacientes } from '../../variables/rutas';
+const datos_toolbar = {
+    titulo: 'biolab',
+    enlaces: [
+        {
+            titulo: 'Examenes de pacientes',
+            ruta: examenes_pacientes
+        },
+        {
+            titulo: 'Examenes',
+            ruta: examenes_pacientes
+        },
+        {
+            titulo: 'Pacientes',
+            ruta: examenes_pacientes
+        },
+    ],
+    primarios: [ ]
 }
 </script>

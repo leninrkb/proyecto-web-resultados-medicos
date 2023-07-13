@@ -20,7 +20,7 @@
     </div>
 </template>
 <script>
-import Combo from './Combo.vue';
+import Combo from './ui/Combo.vue';
 import { get_generos } from "../variables/rutas";
 
 export default {

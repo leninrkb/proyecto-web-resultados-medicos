@@ -15,7 +15,7 @@
 </template>
 <script>
 import { get_roles_usuarios } from '../variables/rutas';
-import Combo from '../components/Combo.vue';
+import Combo from '../components/ui/Combo.vue';
 export default {
     name: 'FormUsuario',
     props:{

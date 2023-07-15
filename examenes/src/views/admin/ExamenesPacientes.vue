@@ -2,16 +2,18 @@
     <h3 class="text-gray-200 font-sans text-xl capitalize">Todos los examenes de los pacientes</h3>
     <br>
     <Tabla :mostrar="terminado_examenes" :datos="tabla_examenes" @recargar="recargar" @fila="capturar_fila"></Tabla>
+    <DetalleExamen></DetalleExamen>
 </template>
 <script>
 import Tabla from '@/components/ui/Tabla.vue';
+import DetalleExamen from '../../components/DetalleExamen.vue';
 import axios from 'axios';
 import { get_examenes, get_personas, get_instituciones, get_estados} from '../../variables/rutas';
 
 export default {
     name: 'ExamenesPacientes',
     components:{
-        Tabla
+        Tabla, DetalleExamen
     },
     data() {
         return {

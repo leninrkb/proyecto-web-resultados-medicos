@@ -25,7 +25,6 @@ export default {
             try {
                 this.cargar_generos();
                 axios.get(get_personas).then(resp => {
-                    console.log(this.generos);
                     this.pacientes.titulos = ['id','cedula','nombres','apellidos','fecha_nacimiento','genero'];
                     this.pacientes.registros = resp.data.result;
                     this.pacientes.registros.forEach(element => {

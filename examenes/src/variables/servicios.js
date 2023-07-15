@@ -9,6 +9,14 @@ export const InstitucionService = {
         } catch (error) {
             return false;
         }
+    },
+    async get_instituciones_id(id) {
+        try {
+            let resp = await axios.get(get_instituciones + id);
+            return resp.data.result;
+        } catch (error) {
+            return false;
+        }
     }
 };
 

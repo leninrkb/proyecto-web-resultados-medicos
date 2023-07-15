@@ -2,7 +2,7 @@
     <h3 class="text-gray-200 font-sans text-xl capitalize">Todos los examenes de los pacientes</h3>
     <br>
     <Tabla :mostrar="terminado_examenes" :datos="tabla_examenes" @recargar="recargar" @fila="capturar_fila"></Tabla>
-    <DetalleExamen :mostrar="mostrar_detalle"></DetalleExamen>
+    <DetalleExamen :mostrar="mostrar_detalle" :fila="fila"></DetalleExamen>
 </template>
 <script>
 import Tabla from '@/components/ui/Tabla.vue';
@@ -24,6 +24,7 @@ export default {
             instituciones: undefined,
             estados: undefined,
             mostrar_detalle: false,
+            fila: {}
         }
     },
     methods: {
@@ -51,8 +52,9 @@ export default {
             this.cargar_examenes();
         },
         capturar_fila(fila) {
+            this.mostrar_detalle = false;
+            this.fila = fila;
             this.mostrar_detalle = true;
-            console.log(fila);
         }
     },
     mounted() {

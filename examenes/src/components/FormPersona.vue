@@ -13,7 +13,7 @@
         <input class="col-span-2 px-2 rounded-md" type="date" id="fecha" v-model="fecha_nacimiento" @input="emitir_info">
 
         <label class="col-span-1 font-semibold" for="genero">genero</label>
-        <Combo :peticion="get_generos" :id_prop="id_genero"  @emitido="capturar_evento"></Combo>
+        <Combo llave="genero" :peticion="get_generos" :id_prop="id_genero"  @emitido="capturar_evento"></Combo>
     </div>
     <div v-if="mostrar_errores" class="w-60 mx-auto my-3 text-red-700 font-semibold">
         <p class="break-before-all">{{errores}}</p>

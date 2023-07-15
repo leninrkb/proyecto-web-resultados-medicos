@@ -19,6 +19,10 @@ export default {
         peticion:{
             type: String,
             required: true
+        },
+        llave:{
+            type: String,
+            required: true
         }
     },
     mounted() {
@@ -46,11 +50,10 @@ export default {
             this.terminado = false;
             axios.get(this.peticion)
             .then(resp => {
-                let keys = Object.keys(resp.data.result[0]);
                 resp.data.result.forEach(element => {
                     this.lista.push({
                         id: element.id,
-                        valor: element[keys[0]]
+                        valor: element[this.llave]
                     });
                 });
                 this.terminado = true;

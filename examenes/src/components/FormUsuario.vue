@@ -7,7 +7,7 @@
         <input class="col-span-2 px-2 rounded-md" type="password" id="contrasena" v-model="contrasena" @input="emitir_datos">
 
         <label v-if="_rol_visible" class="col-span-1 font-semibold" for="rol">rol</label>
-        <Combo v-if="_rol_visible" :id_prop="id_rol" @emitido="capturar_valor" :peticion="get_roles_usuarios"></Combo>
+        <Combo v-if="_rol_visible" llave="rol" :id_prop="id_rol" @emitido="capturar_valor" :peticion="get_roles_usuarios"></Combo>
     </div>
     <div v-if="mostrar_errores" class="w-80 mx-auto my-3 text-red-700 font-semibold">
         <p class="break-before-all">{{errores}}</p>

@@ -2,10 +2,12 @@
     <div class='container mx-auto'>
         <Toolbar :datos=datos></Toolbar>
         <br>
+        <div class="mx-5 sm:mx-24">
         <div class="p-3 text-gray-400">
             HOME
             - portada de bienvenida
         </div>
+    </div>
     </div>
 </template>
 <script>

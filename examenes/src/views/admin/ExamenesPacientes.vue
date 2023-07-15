@@ -2,13 +2,15 @@
     <h3 class="text-gray-200 font-sans text-xl capitalize">Todos los examenes de los pacientes</h3>
     <br>
     <Tabla :mostrar="terminado_examenes" :datos="tabla_examenes" @recargar="recargar" @fila="capturar_fila"></Tabla>
-    <DetalleExamen :mostrar="mostrar_detalle" :fila="fila"></DetalleExamen>
+    <br>
+    <div v-if="mostrar_detalle" class="flex flex-row-reverse">
+        <button class="rounded-md bg-red-600 p-1 text-gray-100 hover:bg-red-700" @click="mostrar_detalle = !mostrar_detalle">Cerrar</button>
+    </div>
+    <DetalleExamen v-if="mostrar_detalle" :fila="fila"></DetalleExamen>
 </template>
 <script>
 import Tabla from '@/components/ui/Tabla.vue';
 import DetalleExamen from '../../components/DetalleExamen.vue';
-import axios from 'axios';
-import { get_examenes, get_personas, get_instituciones, get_estados } from '../../variables/rutas';
 import { InstitucionService, EstadoService, PersonaService, ExamenService } from '../../variables/servicios';
 
 export default {
@@ -23,8 +25,8 @@ export default {
             personas: undefined,
             instituciones: undefined,
             estados: undefined,
-            mostrar_detalle: false,
-            fila: {}
+            fila: {},
+            mostrar_detalle: false
         }
     },
     methods: {
@@ -52,9 +54,8 @@ export default {
             this.cargar_examenes();
         },
         capturar_fila(fila) {
-            this.mostrar_detalle = false;
-            this.fila = fila;
             this.mostrar_detalle = true;
+            this.fila = fila;
         }
     },
     mounted() {

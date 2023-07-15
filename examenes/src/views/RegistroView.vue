@@ -2,6 +2,8 @@
     <div class='container mx-auto font-sans'>
         <Toolbar :datos=datos></Toolbar>
         <br>
+        <div class="mx-5 sm:mx-24">
+
         <div class="p-3 text-gray-400">
             <h2 class="text-2xl">Registro</h2>
             <h2 class="text-xl">Crea tu usuario</h2>
@@ -23,6 +25,7 @@
                 </div>
             </Card>
 
+        </div>
         </div>
     </div>
 </template>

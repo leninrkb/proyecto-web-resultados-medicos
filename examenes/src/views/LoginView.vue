@@ -2,6 +2,8 @@
     <div class='container mx-auto'>
         <Toolbar :datos=datos></Toolbar>
         <br>
+        <div class="mx-5 sm:mx-24">
+
         <div class="p-3 text-gray-400">
             <h2 class="text-2xl">Login</h2>
             <h2 class="text-xl">Ingresa al sistema</h2>
@@ -19,6 +21,7 @@
                     <p class="font-semibold italic">{{mensaje}}</p>
                 </div>
             </Card>
+        </div>
         </div>
     </div>
 </template>

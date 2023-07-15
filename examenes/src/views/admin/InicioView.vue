@@ -8,7 +8,9 @@
              @click="terminar_sesion"> Terminar sesion </button>
         </div>
         <br>
-        <router-view></router-view>
+        <div class="mx-5 sm:mx-24">
+            <router-view></router-view>
+        </div>
     </div>
 </template>
 <script>

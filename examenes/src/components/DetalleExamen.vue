@@ -8,14 +8,14 @@
             <br>
             <img class="w-32 rounded-md ring-1 ring-sky-500" :src="institucion.path_img" alt="logo laboratorio">
             <h4 class="text-sky-500 font-semibold">Examen No. {{examen.id}}</h4>
-            <h4 class="text-gray-200 font-semibold uppercase">{{fila.nombres}} {{fila.apellidos}}</h4>
+            <h4 class="text-gray-200 font-semibold uppercase">{{persona.nombres}} {{persona.apellidos}}</h4>
             <div class="border-l-4 pl-2 border-sky-500 text-sm">
                 <h5><strong>Identificacion: </strong> {{persona.cedula}} </h5>
                 <h5><strong>Fecha de nacimiento: </strong> {{persona.fecha_nacimiento}} </h5>
                 <h5><strong>Edad: </strong> {{persona.edad}} </h5>
                 <h5><strong>Genero: </strong> {{genero.genero}} </h5>
                 <div class="flex flex-row-reverse">
-                    <h5><strong>Fecha de ingreso: </strong>{{fila.fecha_realiza}}</h5>
+                    <h5><strong>Fecha de ingreso: </strong>{{examen.fecha_realiza}}</h5>
                 </div>
             </div>
             <br>
@@ -113,10 +113,10 @@ export default {
                 this.detalle = [],
                 this.qr_url = ''
         },
-        crearQR() {
+        crearQR(datos) {
             let ctx = this;
-            qrcode.toDataURL('im alone!', function (err, url) {
-                console.log(url)
+            datos = JSON.stringify(datos);
+            qrcode.toDataURL(datos, function (err, url) {
                 ctx.qr_url = url;
             })
         },
@@ -124,15 +124,15 @@ export default {
             this.mostrar = false;
             try {
                 this.reestablecer();
-                this.institucion = await InstitucionService.get_instituciones_id(this.fila.id_institucion);
                 this.examen = await ExamenService.get_examen_id(this.fila.id);
-                this.persona = await PersonaService.get_persona_id(this.fila.id_persona);
+                this.institucion = await InstitucionService.get_instituciones_id(this.examen.id_institucion);
+                this.persona = await PersonaService.get_persona_id(this.examen.id_persona);
                 this.persona.edad = calcularEdad(this.persona.fecha_nacimiento);
                 this.genero = await GeneroService.get_genero_id(this.persona.id_genero);
                 let tipos_examenes = await TipoExamenService.get_tipos();
                 let estados_examenes = await EstadoService.get_estados();
-                let resp = await DetalleExamenService.get_detalle();
-                resp.forEach(element => {
+                let detalle_examen = await DetalleExamenService.get_detalle();
+                detalle_examen.forEach(element => {
                     if (element.id_examen == this.examen.id) {
                         let tipo = tipos_examenes.find(p => p.id == element.id_tipo);
                         element.tipo = tipo.tipo;
@@ -142,7 +142,9 @@ export default {
                         this.detalle.push(element);
                     }
                 });
-                this.crearQR();
+                let datos = {};
+                datos.id_examen = this.fila.id;
+                this.crearQR(datos);
             } catch (error) {
                 console.log(error);
             }

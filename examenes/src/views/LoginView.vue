@@ -86,7 +86,6 @@ export default {
             .then(resp => {
                 let usuario = resp.data.result;
                 if(usuario != false){
-                    console.log(usuario);
                     this.mensaje = 'autenticado';
                     this.validar_tipo_usuario(usuario)
                 }else{

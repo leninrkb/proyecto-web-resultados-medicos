@@ -60,10 +60,8 @@
                     {{examen.observacion}}
                 </p>
             </div>
-            <button @click="crearQR">generar qr</button>
-            <div id="container">
-                <canvas id="canvas"></canvas>
-            </div>
+            <br>
+            <img class="rounded-lg" :src="qr_url" alt="qr">
         </div>  
         <hr>
     </div>
@@ -100,7 +98,9 @@ export default {
             persona: {},
             genero: {},
             tipo_examen: {},
-            detalle: []
+            detalle: [],
+            qr_url: ''
+
         }
     },
     methods: {
@@ -110,20 +110,19 @@ export default {
                 this.persona = {},
                 this.genero = {},
                 this.tipo_examen = {},
-                this.detalle = []
+                this.detalle = [],
+                this.qr_url = ''
         },
         crearQR() {
-            let canvas = document.getElementById('container');
-            qrcode.toCanvas('hola soy joao', { errorCorrectionLevel: 'H' }, function (err, canvas) {
-                if (err) throw err
-                var container = document.getElementById('container');
-                container.appendChild(canvas)
-            });
+            let ctx = this;
+            qrcode.toDataURL('im alone!', function (err, url) {
+                console.log(url)
+                ctx.qr_url = url;
+            })
         },
         async cargar_datos() {
             this.mostrar = false;
             try {
-                // this.crearQR();
                 this.reestablecer();
                 this.institucion = await InstitucionService.get_instituciones_id(this.fila.id_institucion);
                 this.examen = await ExamenService.get_examen_id(this.fila.id);
@@ -143,15 +142,15 @@ export default {
                         this.detalle.push(element);
                     }
                 });
-
+                this.crearQR();
             } catch (error) {
                 console.log(error);
-             }
+            }
             this.mostrar = true;
 
         }
     },
-    beforeMount() {
+    mounted() {
         this.cargar_datos();
     },
     watch: {

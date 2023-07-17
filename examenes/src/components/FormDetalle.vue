@@ -119,7 +119,7 @@ import Card from './ui/Card.vue';
 import Combo from './ui/Combo.vue';
 import { get_instituciones, get_estados } from '../variables/rutas';
 import { examen } from '../variables/examen';
-import { ExamenService, TipoExamenService, DetalleExamenService } from '../variables/servicios';
+import { TipoExamenService, DetalleExamenService } from '../variables/servicios';
 import { arrows_rotate } from '../variables/svg';
 import Tabla from '../components/ui/Tabla.vue';
 

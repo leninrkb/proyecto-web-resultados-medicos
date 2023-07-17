@@ -8,7 +8,7 @@ import {
     get_examen_id,
     get_tipos_examen,
     get_detalle, 
-    create_examen, create_detalle
+    create_examen, create_detalle, delete_examen
 } from './rutas';
 
 export const InstitucionService = {
@@ -82,6 +82,14 @@ export const ExamenService = {
             let resp = await axios.post(create_examen,{
                 parameter: examen
             });
+            return resp.data.result;
+        } catch (error) {
+            return false;
+        }
+    },
+    async delete(id) {
+        try {
+            let resp = await axios.delete(delete_examen + id);
             return resp.data.result;
         } catch (error) {
             return false;

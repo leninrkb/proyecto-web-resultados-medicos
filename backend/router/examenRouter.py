@@ -26,7 +26,7 @@ async def get_genero_id(id:int, db:Session=Depends(getDB)):
 #     _examen = crud.update_genero(db, request.parameter)
 #     return Response(code=200, status='ok', message='se actualizo una genero', result=_examen).dict(exclude_none=True)
 
-# @router_genero.delete('/delete/{id}')
-# async def delete_genero(id:int, db:Session=Depends(getDB)):
-#     crud.delete_genero(db, id)
-#     return Response(code=200, status='ok', message='se elimino un genero').dict(exclude_none=True)
+@router_examen.delete('/delete/{id}')
+async def delete_genero(id:int, db:Session=Depends(getDB)):
+    crud.delete_examen(db, id)
+    return Response(code=200, status='ok', message='se elimino').dict(exclude_none=True)

@@ -23,10 +23,10 @@ def create_examen(db:Session, examen:ExamenSchema):
     db.refresh(_var)
     return _var
 
-# def delete_genero(db:Session, id:int):
-#     _var = get_genero_id(db = db, id = id)
-#     db.delete(_var)
-#     db.commit()
+def delete_examen(db:Session, id:int):
+    _var = get_examen_id(db = db, id = id)
+    db.delete(_var)
+    db.commit()
 
 # def update_genero(db:Session, genero:ExamenSchema):
 #     _var = get_genero_id(db = db, id = genero.id)

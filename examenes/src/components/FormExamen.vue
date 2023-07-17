@@ -1,10 +1,10 @@
 <template lang="es">
     <div>
-        form examen paciente
+        form examen
     </div>
 </template>
 <script>
 export default {
-    name:'FormExamenPaciente'
+    name:'FormExamen'
 }
 </script>

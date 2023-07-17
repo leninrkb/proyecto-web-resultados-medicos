@@ -8,6 +8,7 @@ export const resumen = 'http://localhost:8080/resumen/';
 export const inicio_admin = '/inicio';
 export const examenes_pacientes = inicio_admin + '/examenes';
 export const administrar = inicio_admin + '/administrar';
+    export const nuevo_examen = administrar + '/nuevo_examen';
 export const pacientes = inicio_admin + '/pacientes';
 
 //api

@@ -8,6 +8,7 @@ import ExamenesPacientes from '../views/admin/ExamenesPacientes.vue'
 import AdministrarExamenes from '../views/admin/AdministrarExamenes.vue'
 import Pacientes from '../views/admin/Pacientes.vue'
 import ResumenView from '../views/ResumenView.vue';
+import FormExamen from '../components/FormExamen.vue'
 
 const routes = [
   {
@@ -48,7 +49,14 @@ const routes = [
       {
         path:'administrar',
         name:'administrar',
-        component: AdministrarExamenes
+        component: AdministrarExamenes,
+        children:[
+          {
+            path:'nuevo_examen',
+            name:'nuevo_examen',
+            component: FormExamen
+          },
+        ]
       },
       {
         path:'pacientes',

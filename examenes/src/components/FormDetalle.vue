@@ -24,10 +24,6 @@
                         <input disabled="true" class="px-1  rounded-md" type="text" v-model="_examen.id">
                     </div>
                     <div>
-                        <label for=""><strong>Institucion</strong></label><br>
-                        <input disabled="true" class="px-1  rounded-md" type="text" v-model="_institucion.institucion">
-                    </div>
-                    <div>
                         <label for=""><strong>Estado del examen</strong></label><br>
                         <input disabled="true" class="px-1  rounded-md" type="text" v-model="_examen.estado">
                     </div>
@@ -147,7 +143,6 @@ export default {
             _examen: {},
             _detalle: [],
             _persona: {},
-            _institucion: {},
             _id_estado: 0,
             _id_institucion: 0,
             _resultado: 'pendiente',
@@ -167,7 +162,6 @@ export default {
             try {
                 this._examen = this.examen.examen ?? { id: '', examen: '', institucion: '', estado: '', motivo: '', observacion: '', fecha_realiza: '' };
                 this._detalle = this.examen.detalle ?? [];
-                this._institucion = this.examen.institucion ?? { institucion: '' };
                 this._persona = this.examen.persona ?? { nombres: '', apellidos: '' };
                 this.cargar_tipos();
             } catch (error) { }
@@ -179,7 +173,9 @@ export default {
             this.terminado_tipos = true;
         },
         guardar_borrador() {
-            // 
+            this.examen.setDetalle(this._detalle);
+            this.examen.setExamen(this._examen);
+            this.examen.setPersona(this._persona);
         },
         capturar_evento(tipo, id) {
             this[tipo] = id;

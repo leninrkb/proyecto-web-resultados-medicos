@@ -65,8 +65,10 @@ export default {
             detalle = JSON.parse(detalle);
             this.examen.setExamen(detalle.examen);
             this.examen.setDetalle(detalle.detalle);
+            this.examen.setPersona(detalle.persona);
             console.log(this.examen.examen);
             console.log(this.examen.detalle);
+            console.log(this.examen.persona);
         }
     },
     mounted() {

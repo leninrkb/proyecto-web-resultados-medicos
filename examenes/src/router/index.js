@@ -7,6 +7,7 @@ import InicioView from '../views/admin/InicioView.vue'
 import ExamenesPacientes from '../views/admin/ExamenesPacientes.vue'
 import ExamenesDisponibles from '../views/admin/ExamenesDisponibles.vue'
 import Pacientes from '../views/admin/Pacientes.vue'
+import ResumenView from '../views/ResumenView.vue';
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     component: LoginView
   },
   {
+    path: '/resumen/:id',
+    name: 'resumen',
+    component: ResumenView
+  },
+  {
     path: '/inicio',
     name: 'inicio',
     component: InicioView,
@@ -48,7 +54,7 @@ const routes = [
         path:'pacientes',
         name:'pacientes',
         component: Pacientes
-      }
+      },
     ]
   },
 ]

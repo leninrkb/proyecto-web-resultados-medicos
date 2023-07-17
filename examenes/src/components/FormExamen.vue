@@ -4,7 +4,7 @@
             <button class="bg-green-600 rounded-lg p-1 active:bg-green-800" @click="cargar_examen">Cargar examen</button>
             <button class="bg-green-600 rounded-lg p-1 active:bg-green-800" @click="guardar_borrador">Guardar borrador</button>
         </div>
-        <form action="">
+        <form v-if="!guardando_examen" action="">
             <Card class="text-gray-800 font-sans">
                 <label class="text-green-600" for=""><strong>Datos de la persona</strong></label>
                 <div class="flex flex-wrap gap-4">
@@ -31,11 +31,11 @@
                 <div class="flex flex-wrap gap-4">
                     <div>
                         <label for=""><strong>Institucion</strong></label><br>
-                        <Combo llave="institucion" :peticion="get_instituciones" id_prop="1"  @emitido="capturar_evento('institucion',$event)"></Combo>
+                        <Combo llave="institucion" :peticion="get_instituciones" id_prop="1"  @emitido="capturar_evento('_id_institucion',$event)"></Combo>
                     </div>
                     <div>
                         <label for=""><strong>Estado del examen</strong></label><br>
-                        <Combo llave="estado" :peticion="get_estados" id_prop="3"  @emitido="capturar_evento('institucion',$event)"></Combo>
+                        <Combo llave="estado" :peticion="get_estados" id_prop="1"  @emitido="capturar_evento('_id_estado',$event)"></Combo>
                     </div>
                     <div>
                         <label for=""><strong>Titulo</strong></label><br>
@@ -58,8 +58,14 @@
                 <div class="text-gray-200">
                     <button type="submit" class="bg-cyan-500 rounded-lg p-1 active:bg-cyan-800" @click="guardar_examen">Guardar nuevo examen</button>
                 </div>
+                <div class="italic">
+                    <p><strong>{{mensaje_examen}}</strong></p>
+                </div>
             </Card>
         </form>
+        <div v-else class="w-10 h-10 animate-spin p-2 bg-gray-300 rounded-full">
+            <img :src="arrows_rotate" alt="arrows rotate">
+        </div>
     </div>
 </template>
 <script>
@@ -67,6 +73,8 @@ import Card from './ui/Card.vue';
 import Combo from './ui/Combo.vue';
 import { get_instituciones, get_estados } from '../variables/rutas';
 import { examen } from '../variables/examen';
+import { ExamenService } from '../variables/servicios';
+import { arrows_rotate } from '../variables/svg';
 export default {
     name:'FormExamen',
     props:{
@@ -80,12 +88,17 @@ export default {
     },
     data() {
         return {
+            arrows_rotate: arrows_rotate,
             get_instituciones,
             get_estados,
-            _examen: {},
+            _examen: { },
             _detalle: [],
             _persona: { },
-            examen: examen()
+            examen: examen(),
+            guardando_examen: false,
+            mensaje_examen: '',
+            _id_estado: 0,
+            _id_institucion: 0
         }
     },
     methods: {
@@ -106,22 +119,27 @@ export default {
             this.examen.setExamen(this._examen);
             this.examen.setDetalle(this._detalle);
         },
-        guardar_examen(){
+        async guardar_examen(){
+            this.guardando_examen = true;
             let nuevo = {};
-            nuevo.id_institucion = this._examen.id_institucion;
-            nuevo.id_estado = this._examen.id_estado;
+            nuevo.id = 0;
+            nuevo.id_institucion = this._id_institucion;
+            nuevo.id_estado = this._id_estado;
             nuevo.id_persona = this._persona.id;
             nuevo.examen = this._examen.examen;
             nuevo.motivo = this._examen.motivo;
             nuevo.fecha_realiza = this._examen.fecha_realiza;
-            nuevo.observacion = this._examen.observacion;
-
-
+            nuevo.observacion = this._examen.observacion ?? 'pendiente';
             console.log(nuevo);
+            await ExamenService.create_examen(nuevo).then(resp => {
+                this.mensaje_examen = 'examen guardado!';
+            }).catch(error => {
+                this.mensaje_examen = error;
+            });
+            this.guardando_examen = false;
         },
-        capturar_evento(tipo, evento){
-            console.log(tipo);
-            console.log(evento);
+        capturar_evento(tipo, id){
+            this[tipo] = id;
         },
     },
     beforeMount() {

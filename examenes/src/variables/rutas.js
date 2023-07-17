@@ -25,3 +25,4 @@ export const get_instituciones = 'http://127.0.0.1:8000/institucion/get/';
 export const get_estados = 'http://127.0.0.1:8000/estado_examen/get/';
 export const get_tipos_examen = 'http://127.0.0.1:8000/tipo_examen/get/';
 export const get_detalle = 'http://127.0.0.1:8000/detalle/get/';
+export const create_examen = 'http://127.0.0.1:8000/examen/create';

@@ -6,10 +6,10 @@ from crud import examenCrud as crud
 
 router_examen = APIRouter()
 
-# @router_genero.post('/create')
-# async def create_genero(request:RequestExamen, db:Session=Depends(getDB)):
-#     _examen = crud.create_genero(db, request.parameter)
-#     return Response(code=200, status='ok', message='se ha creado un genero', result=_examen).dict(exclude_none=True)
+@router_examen.post('/create')
+async def create_genero(request:RequestExamen, db:Session=Depends(getDB)):
+    _examen = crud.create_examen(db, request.parameter)
+    return Response(code=200, status='ok', message='se ha creado un examen', result=_examen).dict(exclude_none=True)
 
 @router_examen.get('/get')
 async def get_examenes(db:Session=Depends(getDB)):

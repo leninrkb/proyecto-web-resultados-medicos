@@ -7,7 +7,8 @@ import {
     get_estados, 
     get_examen_id,
     get_tipos_examen,
-    get_detalle
+    get_detalle, 
+    create_examen
 } from './rutas';
 
 export const InstitucionService = {
@@ -71,6 +72,16 @@ export const ExamenService = {
     async get_examen_id(id) {
         try {
             let resp = await axios.get(get_examen_id + id);
+            return resp.data.result;
+        } catch (error) {
+            return false;
+        }
+    },
+    async create_examen(examen) {
+        try {
+            let resp = await axios.post(create_examen,{
+                parameter: examen
+            });
             return resp.data.result;
         } catch (error) {
             return false;

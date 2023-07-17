@@ -69,7 +69,7 @@ create table examen(
 	fecha_realiza date not null,
 	observacion varchar(500) not null,
 	constraint fk_id_institucion foreign key (id_institucion) references institucion(id),
-	constraint fk_id_persona foreign key (id_persona) references persona(id), 
+	constraint fk_id_persona foreign key (id_persona) references persona(id) on delete cascade, 
 	constraint fk_id_estado foreign key (id_estado) references estado_examen(id) 
 );
 
@@ -80,7 +80,7 @@ create table detalle_examen(
 	id_estado integer not null,
 	resultado varchar(500) not null,
 	observacion varchar(500) not null,
-	constraint fk_id_examen foreign key (id_examen) references examen(id),
+	constraint fk_id_examen foreign key (id_examen) references examen(id) on delete cascade,
 	constraint fk_id_tipo foreign key (id_tipo) references tipo_examen(id), 
 	constraint fk_id_estado foreign key (id_estado) references estado_examen(id),
 	constraint uk_id_examen_tipo unique(id_examen, id_tipo)

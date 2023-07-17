@@ -8,25 +8,31 @@ def get_examenes(db:Session, skip:int=0, limit:int=100):
 def get_examen_id(db:Session, id:int):
     return db.query(Examen).filter(Examen.id == id).first()
 
-# def create_genero(db:Session, genero:ExamenSchema):
-#     _genero = Examen(
-#         genero = genero.genero
-#     )
-#     db.add(_genero)
-#     db.commit()
-#     db.refresh(_genero)
-#     return _genero
+def create_examen(db:Session, examen:ExamenSchema):
+    _var = Examen(
+        id_institucion = examen.id_institucion,
+        id_persona = examen.id_persona,
+        id_estado = examen.id_estado,
+        examen = examen.examen,
+        motivo = examen.motivo,
+        fecha_realiza = examen.fecha_realiza,
+        observacion = examen.observacion,
+    )
+    db.add(_var)
+    db.commit()
+    db.refresh(_var)
+    return _var
 
 # def delete_genero(db:Session, id:int):
-#     _genero = get_genero_id(db = db, id = id)
-#     db.delete(_genero)
+#     _var = get_genero_id(db = db, id = id)
+#     db.delete(_var)
 #     db.commit()
 
 # def update_genero(db:Session, genero:ExamenSchema):
-#     _genero = get_genero_id(db = db, id = genero.id)
-#     _genero.genero = genero.genero
+#     _var = get_genero_id(db = db, id = genero.id)
+#     _var.genero = genero.genero
 #     db.commit()
-#     db.refresh(_genero)
-#     return _genero
+#     db.refresh(_var)
+#     return _var
 
 

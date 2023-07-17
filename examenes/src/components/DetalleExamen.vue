@@ -224,6 +224,7 @@ export default {
                 let tipos_examenes = await TipoExamenService.get_tipos();
                 let estados_examenes = await EstadoService.get_estados();
                 let detalle_examen = await DetalleExamenService.get_detalle();
+                this.examen.estado = estados_examenes.find(p => p.id == this.examen.id_estado).estado;
                 detalle_examen.forEach(element => {
                     if (element.id_examen == this.examen.id) {
                         let tipo = tipos_examenes.find(p => p.id == element.id_tipo);

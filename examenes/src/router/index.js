@@ -9,6 +9,7 @@ import AdministrarExamenes from '../views/admin/AdministrarExamenes.vue'
 import Pacientes from '../views/admin/Pacientes.vue'
 import ResumenView from '../views/ResumenView.vue';
 import FormExamen from '../components/FormExamen.vue'
+import FormDetalle from '../components/FormDetalle.vue'
 
 const routes = [
   {
@@ -55,6 +56,11 @@ const routes = [
             path:'nuevo_examen',
             name:'nuevo_examen',
             component: FormExamen
+          },
+          {
+            path:'nuevo_detalle',
+            name:'nuevo_detalle',
+            component: FormDetalle
           },
         ]
       },

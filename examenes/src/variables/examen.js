@@ -4,13 +4,15 @@ export const examen = defineStore('examen', {
     state: () => ({
         examen: undefined,
         detalle: undefined,
-        persona: undefined
+        persona: undefined,
+        institucion: undefined
     }),
     actions:{
         eliminarExamen(){
             this.examen = undefined;
             this.detalle = undefined;
             this.persona = undefined;
+            this.institucion = undefined;
         },
         setPersona(persona){
             this.persona = persona;
@@ -20,6 +22,9 @@ export const examen = defineStore('examen', {
         },
         setDetalle(detalle){
             this.detalle = detalle;
+        },
+        setInstitucion(institucion){
+            this.institucion = institucion;
         },
     }
   });

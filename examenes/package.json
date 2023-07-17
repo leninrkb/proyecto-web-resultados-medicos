@@ -10,6 +10,7 @@
     "autoprefixer": "^10",
     "axios": "^1.4.0",
     "core-js": "^3.8.3",
+    "crypto-js": "^4.1.1",
     "pako": "^2.1.0",
     "pinia": "^2.1.4",
     "postcss": "^8",

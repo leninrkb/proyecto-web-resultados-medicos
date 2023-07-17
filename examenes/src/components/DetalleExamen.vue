@@ -80,12 +80,14 @@ import {
 } from '../variables/servicios';
 import { calcularEdad } from '../variables/funciones';
 import qrcode from 'qrcode';
+import { cifrar } from '../variables/funciones';
+import { resumen } from '../variables/rutas';
 
 export default {
     name: 'DetalleExamen',
     props: {
-        fila: {
-            type: Object,
+        id_examen: {
+            type: Number,
             required: true
         }
     },
@@ -116,15 +118,19 @@ export default {
         crearQR(datos) {
             let ctx = this;
             datos = JSON.stringify(datos);
-            qrcode.toDataURL(datos, function (err, url) {
+            datos = cifrar(datos, 'examenes');
+            let url_componente = resumen + datos;
+            console.log( url_componente);
+            qrcode.toDataURL(url_componente, function (err, url) {
                 ctx.qr_url = url;
-            })
+            });
+            
         },
         async cargar_datos() {
             this.mostrar = false;
             try {
                 this.reestablecer();
-                this.examen = await ExamenService.get_examen_id(this.fila.id);
+                this.examen = await ExamenService.get_examen_id(this.id_examen);
                 this.institucion = await InstitucionService.get_instituciones_id(this.examen.id_institucion);
                 this.persona = await PersonaService.get_persona_id(this.examen.id_persona);
                 this.persona.edad = calcularEdad(this.persona.fecha_nacimiento);
@@ -142,9 +148,7 @@ export default {
                         this.detalle.push(element);
                     }
                 });
-                let datos = {};
-                datos.id_examen = this.fila.id;
-                this.crearQR(datos);
+                this.crearQR(this.id_examen);
             } catch (error) {
                 console.log(error);
             }
@@ -156,8 +160,7 @@ export default {
         this.cargar_datos();
     },
     watch: {
-        fila() {
-            console.log(this.fila);
+        id_examen() {
             this.cargar_datos();
         }
     }

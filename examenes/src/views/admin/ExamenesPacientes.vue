@@ -6,7 +6,7 @@
     <div v-if="mostrar_detalle" class="flex flex-row-reverse">
         <button class="rounded-md bg-red-600 p-1 text-gray-100 hover:bg-red-700" @click="mostrar_detalle = !mostrar_detalle">Cerrar</button>
     </div>
-    <DetalleExamen v-if="mostrar_detalle" :fila="fila"></DetalleExamen>
+    <DetalleExamen v-if="mostrar_detalle" :id_examen="fila.id"></DetalleExamen>
 </template>
 <script>
 import Tabla from '@/components/ui/Tabla.vue';

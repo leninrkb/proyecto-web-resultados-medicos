@@ -2,7 +2,7 @@ export const home = '/';
 export const registro = '/registro';
 export const examenes_disponibles = '/examenes_disponibles';
 export const login = '/login';
-export const resumen = '/resumen/';
+export const resumen = 'http://localhost:8080/resumen/';
 
 // admin
 export const inicio_admin = '/inicio';

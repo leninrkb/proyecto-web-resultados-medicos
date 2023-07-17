@@ -3,21 +3,20 @@
         <Toolbar :datos=datos></Toolbar>
         <br>
         <div class="mx-5 sm:mx-24">
-            <div class="p-3 text-gray-400">
-                resumen
-                - portada de bienvenida
-            </div>
+            <DetalleExamen :id_examen="id_examen"></DetalleExamen>
         </div>
     </div>
 </template>
 <script>
+import DetalleExamen from '@/components/DetalleExamen.vue';
 import Toolbar from '@/components/ui/Toolbar.vue';
 import {registro, login} from '../variables/rutas';
-
+import { descifrar } from '../variables/funciones';
+ 
 export default {
     name:'ResumenView',
     components:{
-        Toolbar
+        Toolbar, DetalleExamen
     },
     data() {
         return {
@@ -35,15 +34,18 @@ export default {
                     }
                 ]
             },
-            hash: undefined
+            id_examen: undefined
         }
     },
     methods: {
-        
+        capturar_cifrado(){
+            let cifrado = this.$route.params.id;
+            let descifrado = descifrar(cifrado, 'examenes');
+            this.id_examen = JSON.parse(descifrado);
+        }
     },
     mounted() {
-        this.hash = this.$route.params.id;
-        
+        this.capturar_cifrado();
     },
 }
 </script>

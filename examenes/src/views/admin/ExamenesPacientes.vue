@@ -1,6 +1,9 @@
 <template lang="es">
-    <h3 class="text-gray-200 font-sans text-xl capitalize">Todos los examenes de los pacientes</h3>
-    <br>
+    <div class="text-gray-200 font-sans">
+        <h3 class="font-sans text-xl capitalize">Todos los examenes de los pacientes</h3>
+        <br>
+        <h3><strong>Seleccionado: </strong> {{examen.examen == undefined ? 'ninguno' : 'Examen ID ' + examen.examen.id}}</h3>
+    </div>
     <Tabla :mostrar="terminado_examenes" :datos="tabla_examenes" @recargar="recargar" @fila="capturar_fila"></Tabla>
     <br>
     <div v-if="mostrar_detalle" class="flex flex-row-reverse">
@@ -12,7 +15,7 @@
 import Tabla from '@/components/ui/Tabla.vue';
 import DetalleExamen from '../../components/DetalleExamen.vue';
 import { InstitucionService, EstadoService, PersonaService, ExamenService } from '../../variables/servicios';
-
+import { examen } from '../../variables/examen';
 export default {
     name: 'ExamenesPacientes',
     components: {
@@ -26,7 +29,8 @@ export default {
             instituciones: undefined,
             estados: undefined,
             fila: {},
-            mostrar_detalle: false
+            mostrar_detalle: false,
+            examen: examen()
         }
     },
     methods: {
@@ -58,7 +62,11 @@ export default {
             this.fila = fila;
         },
         capturar_detalle(detalle){
-            console.log(JSON.parse(detalle));
+            detalle = JSON.parse(detalle);
+            this.examen.setExamen(detalle.examen);
+            this.examen.setDetalle(detalle.detalle);
+            console.log(this.examen.examen);
+            console.log(this.examen.detalle);
         }
     },
     mounted() {

@@ -15,5 +15,11 @@ export const examen = defineStore('examen', {
         setPersona(persona){
             this.persona = persona;
         },
+        setExamen(examen){
+            this.examen = examen;
+        },
+        setDetalle(detalle){
+            this.detalle = detalle;
+        },
     }
   });

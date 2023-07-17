@@ -1,76 +1,149 @@
 <template lang="es">
-    <div v-if="mostrar">
-      <h3 class="text-gray-200 font-sans text-xl capitalize">Detalle del examen</h3>
+    <div v-if="mostrar">  
+        <h3 class="text-gray-200 font-sans text-xl capitalize">Detalle del examen</h3>
         <hr>
-        <div class="text-gray-200 text-xl mb-20">
-            <h3 class="flex flex-row-reverse font-bold">{{institucion.institucion}}</h3>
-            <h3 class="flex flex-row-reverse font-bold">{{institucion.ubicacion}}</h3>
-            <br>
-            <img class="w-32 rounded-md ring-1 ring-sky-500" :src="institucion.path_img" alt="logo laboratorio">
-            <h4 class="text-sky-500 font-semibold">Examen No. {{examen.id}}</h4>
-            <h4 class="text-gray-200 font-semibold uppercase">{{persona.nombres}} {{persona.apellidos}}</h4>
-            <div class="border-l-4 pl-2 border-sky-500 text-sm">
-                <h5><strong>Identificacion: </strong> {{persona.cedula}} </h5>
-                <h5><strong>Fecha de nacimiento: </strong> {{persona.fecha_nacimiento}} </h5>
-                <h5><strong>Edad: </strong> {{persona.edad}} </h5>
-                <h5><strong>Genero: </strong> {{genero.genero}} </h5>
-                <div class="flex flex-row-reverse">
-                    <h5><strong>Fecha de ingreso: </strong>{{examen.fecha_realiza}}</h5>
+        <div>
+            <div class="text-gray-200 text-xl mb-20">
+                <h3 class="flex flex-row-reverse font-bold">{{institucion.institucion}}</h3>
+                <h3 class="flex flex-row-reverse font-bold">{{institucion.ubicacion}}</h3>
+                <br>
+                <img class="w-32 rounded-md ring-1 ring-sky-500" :src="institucion.path_img" alt="logo laboratorio">
+                <h4 class="text-sky-500 font-semibold">Examen No. {{examen.id}}</h4>
+                <h4 class="text-gray-200 font-semibold uppercase">{{persona.nombres}} {{persona.apellidos}}</h4>
+                <div class="border-l-4 pl-2 border-sky-500 text-sm">
+                    <h5><strong>Identificacion: </strong> {{persona.cedula}} </h5>
+                    <h5><strong>Fecha de nacimiento: </strong> {{persona.fecha_nacimiento}} </h5>
+                    <h5><strong>Edad: </strong> {{persona.edad}} </h5>
+                    <h5><strong>Genero: </strong> {{genero.genero}} </h5>
+                    <div class="flex flex-row-reverse">
+                        <h5><strong>Fecha de ingreso: </strong>{{examen.fecha_realiza}}</h5>
+                    </div>
                 </div>
-            </div>
-            <br>
-            <div>
-                <h4 class="mx-auto w-fit font-semibold">Informe de resultados</h4>
-            </div>
-            <br>
-            <div class="text-sm border-l-4 border-green-500 pl-2">
-                <h5 class="uppercase font-semibold text-gray-300">{{examen.examen}}</h5>
-                <h4><strong>Razon del examen</strong></h4>
-                <p class="text-justify text-gray-400">
-                    {{examen.motivo}}
-                </p>
-            </div>
-            <br>
-            <div class="overflow-x-auto text-sm rounded-lg bg-stone-700 p-2">
-                <table class="table-auto divide-y-2 divide-stone-400">
-                    <thead>
-                        <tr>
-                            <th class="px-2">Tipo de Examen</th>
-                            <th class="px-2">Estado</th>
-                            <th class="px-2">V. Referencia</th>
-                            <th class="px-2">Resultados</th>
-                            <th class="px-2">Observaciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="(item, index) in detalle" :key="index">
-                            <td  class="p-2">{{item.tipo}}</td>
-                            <td  class="p-2">{{item.estado}}</td>
-                            <td  class="p-2">{{item.referencia}}</td>
-                            <td  class="p-2">{{item.resultado}}</td>
-                            <td  class="p-2">{{item.observacion}}</td>
-                        </tr>
-                    </tbody>
-                </table> 
-            </div>
-            <br>
-            <div class="text-sm border-l-4 border-green-500 pl-2">
-                <h4><strong>Observaciones</strong></h4>
-                <p class="text-justify text-gray-400">
-                    {{examen.observacion}}
-                </p>
-            </div>
-            <br>
-            <img class="rounded-lg" :src="qr_url" alt="qr">
-        </div>  
+                <br>
+                <div>
+                    <h4 class="mx-auto w-fit font-semibold">Informe de resultados</h4>
+                </div>
+                <br>
+                <div class="text-sm border-l-4 border-green-500 pl-2">
+                    <h5 class="uppercase font-semibold text-gray-300">{{examen.examen}}</h5>
+                    <h4><strong>Razon del examen</strong></h4>
+                    <p class="text-justify text-gray-400">
+                        {{examen.motivo}}
+                    </p>
+                </div>
+                <br>
+                <div class="overflow-x-auto text-sm rounded-lg bg-stone-700 p-2">
+                    <table class="table-auto divide-y-2 divide-stone-400">
+                        <thead>
+                            <tr>
+                                <th class="px-2">Tipo de Examen</th>
+                                <th class="px-2">Estado</th>
+                                <th class="px-2">V. Referencia</th>
+                                <th class="px-2">Resultados</th>
+                                <th class="px-2">Observaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(item, index) in detalle" :key="index">
+                                <td  class="p-2">{{item.tipo}}</td>
+                                <td  class="p-2">{{item.estado}}</td>
+                                <td  class="p-2">{{item.referencia}}</td>
+                                <td  class="p-2">{{item.resultado}}</td>
+                                <td  class="p-2">{{item.observacion}}</td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </div>
+                <br>
+                <div class="text-sm border-l-4 border-green-500 pl-2">
+                    <h4><strong>Observaciones</strong></h4>
+                    <p class="text-justify text-gray-400">
+                        {{examen.observacion}}
+                    </p>
+                </div>
+                <br>
+                <img class="rounded-lg" :src="qr_url" alt="qr">
+            </div> 
+        </div> 
         <hr>
+        <div class="text-gray-200 mt-3 mb-3">
+            <button class="bg-teal-600 p-2 hover:ring-1 ring-teal-300 active:bg-teal-700 rounded-md" @click="generarPdf">Descargar PDF</button>
+        </div>
+
     </div>
     <div v-else class="w-10 h-10 p-2 mx-auto animate-spin bg-gray-300 rounded-full">
         <img :src="arrows_rotate" alt="arrows rotate">
     </div>
+
+    <div v-show="generando_pdf" id="detalle_pdf">
+            <div class="text-black text-xl mb-20 bg-white">
+                <h3 class="flex flex-row-reverse font-bold">{{institucion.institucion}}</h3>
+                <h3 class="flex flex-row-reverse font-bold">{{institucion.ubicacion}}</h3>
+
+                <h4 class="text-sky-500 font-semibold">Examen No. {{examen.id}}</h4>
+
+                <h4 class="mb-3 font-semibold uppercase">{{persona.nombres}} {{persona.apellidos}}</h4>
+                <div class="border-l-4 pl-2 border-sky-500 text-sm">
+                    <h5><strong>Identificacion: </strong> {{persona.cedula}} </h5>
+                    <h5><strong>Fecha de nacimiento: </strong> {{persona.fecha_nacimiento}} </h5>
+                    <h5><strong>Edad: </strong> {{persona.edad}} </h5>
+                    <h5><strong>Genero: </strong> {{genero.genero}} </h5>
+                    <div class="flex flex-row-reverse">
+                        <h5><strong>Fecha de ingreso: </strong>{{examen.fecha_realiza}}</h5>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <h4 class="mx-auto w-fit font-semibold uppercase">Informe de resultados</h4>
+                </div>
+                <br>
+                <div class="text-sm border-l-4 border-green-500 pl-2 pb-5">
+                    <h5 class="uppercase font-semibold">{{examen.examen}}</h5>
+                    <h4><strong>Razon del examen</strong></h4>
+                    <p class="text-justify">
+                        {{examen.motivo}}
+                    </p>
+                </div>
+                <br>
+                <div class="overflow-x-auto text-sm rounded-lg bg-gray-200 p-2">
+                    <table class="table-auto">
+                        <thead>
+                            <tr>
+                                <th class="px-2">Tipo de Examen</th>
+                                <th class="px-2">Estado</th>
+                                <th class="px-2">V. Referencia</th>
+                                <th class="px-2">Resultados</th>
+                                <th class="px-2">Observaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="(item, index) in detalle" :key="index">
+                                <td  class="p-2">{{item.tipo}}</td>
+                                <td  class="p-2">{{item.estado}}</td>
+                                <td  class="p-2">{{item.referencia}}</td>
+                                <td  class="p-2">{{item.resultado}}</td>
+                                <td  class="p-2">{{item.observacion}}</td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </div>
+                <br>
+                <div class="text-sm border-l-4 border-green-500 pl-2 pb-5">
+                    <h4><strong>Observaciones</strong></h4>
+                    <p class="text-justify text-gray-500">
+                        {{examen.observacion}}
+                    </p>
+                </div>
+                <br>
+                <div class="m-1 border-gray-500 rounded-lg bg-gray-600 p-1 w-fit">
+                    <img class="rounded-lg" :src="qr_url" alt="qr">
+                </div>
+            </div> 
+        </div>
     
 </template>
 <script>
+import html2pdf from 'html2pdf.js';
 import { arrows_rotate } from '../variables/svg';
 import {
     InstitucionService, ExamenService,
@@ -101,7 +174,8 @@ export default {
             genero: {},
             tipo_examen: {},
             detalle: [],
-            qr_url: ''
+            qr_url: '',
+            generando_pdf: false
 
         }
     },
@@ -115,16 +189,27 @@ export default {
                 this.detalle = [],
                 this.qr_url = ''
         },
+        async generarPdf() {
+            this.generando_pdf = true;
+            var element = document.getElementById('detalle_pdf');
+            var opt = {
+                margin: 8,
+                filename: this.persona.nombres + ' ' + this.persona.apellidos + '.pdf',
+                image: { type: 'jpg', quality: 1 },
+            };
+            await html2pdf().from(element).set(opt).save();
+            this.generando_pdf = false;
+
+        },
         crearQR(datos) {
             let ctx = this;
             datos = JSON.stringify(datos);
             datos = cifrar(datos, 'examenes');
             let url_componente = resumen + datos;
-            console.log( url_componente);
             qrcode.toDataURL(url_componente, function (err, url) {
                 ctx.qr_url = url;
             });
-            
+
         },
         async cargar_datos() {
             this.mostrar = false;

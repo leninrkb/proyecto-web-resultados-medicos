@@ -234,6 +234,12 @@ export default {
                     }
                 });
                 this.crearQR(this.id_examen);
+                let datos_detalle = {};
+                datos_detalle.examen = this.examen;
+                datos_detalle.persona = this.persona;
+                datos_detalle.institucion = this.institucion;
+                datos_detalle.detalle = this.detalle;
+                this.$emit('detalle',JSON.stringify(datos_detalle));
             } catch (error) {
                 console.log(error);
             }

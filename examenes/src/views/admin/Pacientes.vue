@@ -1,13 +1,15 @@
 <template lang="es">
-    <h3 class="text-gray-200 font-sans text-xl capitalize">Todos los examenes de los pacientes</h3>
-    <br>
-    <Tabla :mostrar="termino_pacientes" :datos="pacientes" @recargar="recargar"></Tabla>
+    <div class="text-gray-200 font-sans">
+        <h3 class="font-sans text-xl capitalize">Todos los examenes de los pacientes</h3>
+        <br>
+        <h3><strong>Seleccionado: </strong> {{examen.persona == undefined ? 'ninguno' : 'ID ' + examen.persona.id +' - '+ examen.persona.nombres}}</h3>
+    </div>
+    <Tabla :mostrar="termino_pacientes" :datos="pacientes" @fila="capturar_fila" @recargar="recargar"></Tabla>
 </template>
 <script>
 import Tabla from '../../components/ui/Tabla.vue';
-import axios from 'axios';
-import { get_personas } from '../../variables/rutas';
 import { GeneroService, PersonaService } from '../../variables/servicios';
+import { examen } from '../../variables/examen';
 
 export default {
     name: 'Pacientes',
@@ -18,7 +20,8 @@ export default {
         return {
             pacientes: { titulos: undefined, registros: undefined },
             termino_pacientes: false,
-            generos: undefined
+            generos: undefined,
+            examen: examen()
         }
     },
     methods: {
@@ -39,7 +42,10 @@ export default {
         },
         recargar(){
             this.cargar_personas();
-        }
+        },
+        capturar_fila(fila){
+            this.examen.setPersona(fila);
+        },
     },
     mounted() {
         this.cargar_personas();

@@ -87,6 +87,28 @@
                 <br>
                 <div>
                     <button class="bg-cyan-500 rounded-lg p-1 active:bg-cyan-800" @click="agregar_detalle">Agregar</button>
+                    <br>
+                    <label class="italic" for=""><strong>{{mensaje_agregar}}</strong></label>
+                </div>
+            </Card>
+            <br>
+            <Card class="text-gray-800 font-sans">
+                <div>
+                    <label for=""><strong>Examenes por hacer</strong></label>
+                    <ul  class="list-disc">
+                        <li  v-for="(item, index) in _detalle" :key="index">
+                            <div class="p-2 rounded-lg mb-2" :class="item.id != 0 ? 'bg-green-400' : 'bg-gray-200'">
+                                {{item.tipo}} / {{item.resultado}} / {{item.observacion}}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <br>
+                <div v-if="!guardando_detalle">
+                    <button class="bg-cyan-500 rounded-lg p-1 active:bg-cyan-800" @click="guardar_detalle">Guardar detalle</button>
+                </div>
+                <div v-else class="w-10 h-10 animate-spin p-2 bg-gray-300 rounded-full">
+                    <img :src="arrows_rotate" alt="arrows rotate">
                 </div>
             </Card>
         </div>
@@ -101,10 +123,9 @@ import Card from './ui/Card.vue';
 import Combo from './ui/Combo.vue';
 import { get_instituciones, get_estados } from '../variables/rutas';
 import { examen } from '../variables/examen';
-import { ExamenService, TipoExamenService } from '../variables/servicios';
+import { ExamenService, TipoExamenService, DetalleExamenService } from '../variables/servicios';
 import { arrows_rotate } from '../variables/svg';
 import Tabla from '../components/ui/Tabla.vue';
-import qrcode from 'qrcode';
 
 export default {
     name: 'FormDetalle',
@@ -133,10 +154,12 @@ export default {
             _observacion: 'pendiente',
             tipo_seleccionado: { tipo: '' },
             mensaje_examen: '',
+            mensaje_agregar: '',
             datos_tipos: {},
             guardando_examen: false,
+            guardando_detalle: false,
             terminado_tipos: false,
-            mostrar_detalle: false
+            mostrar_detalle: false,
         }
     },
     methods: {
@@ -158,25 +181,6 @@ export default {
         guardar_borrador() {
             // 
         },
-        async guardar_examen() {
-            this.guardando_examen = true;
-            let nuevo = {};
-            nuevo.id = 0;
-            nuevo.id_institucion = this._id_institucion;
-            nuevo.id_estado = this._id_estado;
-            nuevo.id_persona = this._persona.id;
-            nuevo.examen = this._examen.examen;
-            nuevo.motivo = this._examen.motivo;
-            nuevo.fecha_realiza = this._examen.fecha_realiza;
-            nuevo.observacion = this._examen.observacion ?? 'pendiente';
-            console.log(nuevo);
-            await ExamenService.create_examen(nuevo).then(resp => {
-                this.mensaje_examen = 'examen guardado!';
-            }).catch(error => {
-                this.mensaje_examen = error;
-            });
-            this.guardando_examen = false;
-        },
         capturar_evento(tipo, id) {
             this[tipo] = id;
         },
@@ -188,17 +192,32 @@ export default {
                 let nuevo_detalle = {};
                 nuevo_detalle.id = 0;
                 nuevo_detalle.id_examen = this._examen.id;
+                nuevo_detalle.id_estado = this._id_estado;
+                nuevo_detalle.tipo = this.tipo_seleccionado.tipo;
                 nuevo_detalle.id_tipo = this.tipo_seleccionado.id;
                 nuevo_detalle.resultado = this._resultado;
                 nuevo_detalle.observacion = this._observacion;
                 let fila = this._detalle.find(p => p.id_tipo == nuevo_detalle.id_tipo);
                 if (fila) {
-                    console.log('ese tipo de examen ya esta listao');
+                    this.mensaje_agregar = 'ese tipo de examen ya esta listado';
                 } else {
                     this._detalle.push(nuevo_detalle);
-                    console.log(this._detalle);
+                    this.mensaje_agregar = '';
                 }
             }
+        },
+        async guardar_detalle(){
+            try {
+                this._detalle.forEach(async element => {
+                    this.guardando_detalle = true;
+                    let {tipo, ...detalle} = element;
+                    if(element.id == 0){
+                        await DetalleExamenService.create(detalle);
+                        element.id = 1;
+                    }
+                });
+            } catch (error) {  }
+            this.guardando_detalle = false;
         }
     },
     beforeMount() {

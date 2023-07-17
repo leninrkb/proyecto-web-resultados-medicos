@@ -6,10 +6,10 @@ from crud import detalleExamenCrud as crud
 
 router_detalle = APIRouter()
 
-# @router_genero.post('/create')
-# async def create_genero(request:RequestExamen, db:Session=Depends(getDB)):
-#     _var = crud.create_genero(db, request.parameter)
-#     return Response(code=200, status='ok', message='se ha creado un genero', result=_var).dict(exclude_none=True)
+@router_detalle.post('/create')
+async def create_genero(request:RequestDetalleExamen, db:Session=Depends(getDB)):
+    _var = crud.create_detalle(db, request.parameter)
+    return Response(code=200, status='ok', message='se ha creado un detalle', result=_var).dict(exclude_none=True)
 
 @router_detalle.get('/get')
 async def get_detalles(db:Session=Depends(getDB)):

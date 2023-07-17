@@ -5,7 +5,7 @@ import ExamenesView from '../views/ExamenesView.vue'
 import LoginView from '../views/LoginView.vue'
 import InicioView from '../views/admin/InicioView.vue'
 import ExamenesPacientes from '../views/admin/ExamenesPacientes.vue'
-import ExamenesDisponibles from '../views/admin/ExamenesDisponibles.vue'
+import AdministrarExamenes from '../views/admin/AdministrarExamenes.vue'
 import Pacientes from '../views/admin/Pacientes.vue'
 import ResumenView from '../views/ResumenView.vue';
 
@@ -46,9 +46,9 @@ const routes = [
         component: ExamenesPacientes
       },
       {
-        path:'disponibles',
-        name:'disponibles',
-        component: ExamenesDisponibles
+        path:'administrar',
+        name:'administrar',
+        component: AdministrarExamenes
       },
       {
         path:'pacientes',

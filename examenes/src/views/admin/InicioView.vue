@@ -6,6 +6,8 @@
             hover:bg-teal-900 hover:text-gray-200
              p-1 rounded-md"
              @click="terminar_sesion"> Terminar sesion </button>
+            <div class="flex-grow"></div>
+            <h3 class="p-1 text-teal-200"><strong>Bienvenido {{sesion.usuario}}</strong></h3>
         </div>
         <br>
         <div class="mx-5 sm:mx-24">

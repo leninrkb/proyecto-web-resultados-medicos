@@ -206,6 +206,7 @@ export default {
             datos = JSON.stringify(datos);
             datos = cifrar(datos, 'examenes');
             let url_componente = resumen + datos;
+            console.log(url_componente);
             qrcode.toDataURL(url_componente, function (err, url) {
                 ctx.qr_url = url;
             });

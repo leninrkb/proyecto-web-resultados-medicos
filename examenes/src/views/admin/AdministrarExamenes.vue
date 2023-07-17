@@ -12,7 +12,7 @@
             animation duration-300
             hover:ring-1 hover:ring-teal-200
             active:bg-teal-800">
-            <router-link :to="nuevo_examen">Eliminar Examen</router-link>
+            <router-link :to="eliminar_examen">Eliminar Examen</router-link>
             </button>
 
             <button class="rounded-lg bg-teal-600 p-1 px-2
@@ -29,13 +29,14 @@
     </div>
 </template>
 <script>
-import { nuevo_examen, nuevo_detalle } from '../../variables/rutas';
+import { nuevo_examen, nuevo_detalle, eliminar_examen } from '../../variables/rutas';
 export default {
     name:'AdministrarExamenes',
     data() {
         return {
             nuevo_examen,
             nuevo_detalle,
+            eliminar_examen,
         }
     },
 }

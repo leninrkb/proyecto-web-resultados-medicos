@@ -10,6 +10,7 @@ create table persona(
 	nombres varchar(50) not null,
 	apellidos varchar(50) not null,
 	fecha_nacimiento date not null,
+	correo varchar(50),
 	constraint fk_id_genero foreign key (id_genero) references genero(id)
     constraint uk_cedula unique (cedula)
 );

@@ -21,6 +21,7 @@ class PersonaSchema(BaseModel):
     nombres: str
     apellidos: str
     fecha_nacimiento: date
+    correo: str
     id_genero: int
     class Config:
         orm_mode = True

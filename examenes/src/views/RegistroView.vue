@@ -116,6 +116,7 @@ export default {
                         "nombres": this.persona.nombres,
                         "apellidos": this.persona.apellidos,
                         "fecha_nacimiento": this.persona.fecha_nacimiento,
+                        "correo": this.persona.correo,
                         "id_genero": this.persona.id_genero
                     }
                 })

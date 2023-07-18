@@ -8,6 +8,9 @@
 
         <label class="col-span-1 font-semibold" for="apellidos">Apellidos</label>
         <input class="col-span-2 px-2 rounded-md" type="text" id="apellidos" v-model="apellidos" @input="emitir_info">
+
+        <label class="col-span-1 font-semibold" for="apellidos">Correo</label>
+        <input class="col-span-2 px-2 rounded-md" type="email" id="apellidos" v-model="correo" @input="emitir_info">
  
         <label class="col-span-1 font-semibold" for="fecha">Fecha de nacimiento</label>
         <input class="col-span-2 px-2 rounded-md" type="date" id="fecha" v-model="fecha_nacimiento" @input="emitir_info">
@@ -43,6 +46,7 @@ export default {
             cedula: '',
             nombres: '',
             apellidos: '',
+            correo: '',
             fecha_nacimiento: '',
             id_genero: 1,
             mostrar_errores: false,
@@ -58,6 +62,7 @@ export default {
                     this.cedula = this.datos.cedula ?? '';
                     this.nombres = this.datos.nombres ?? '';
                     this.apellidos = this.datos.apellidos ?? '';
+                    this.correo = this.datos.correo ?? '';
                     this.fecha_nacimiento = this.datos.fecha_nacimiento ?? '';
                     this.id_genero = this.datos.id_genero ?? 1;
                     this.emitir_info();
@@ -78,6 +83,7 @@ export default {
                     cedula: this.cedula,
                     nombres: this.nombres,
                     apellidos: this.apellidos,
+                    correo: this.correo,
                     fecha_nacimiento: this.fecha_nacimiento,
                     id_genero: this.id_genero
                 }
@@ -92,7 +98,8 @@ export default {
             let mensaje = '';
             let regex_nombres = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
             let regex_cedula = /^\d{10}$/;
-            let regex_fecha = /^\d{4}-(0[1-9]|1[0-2])-([0-2][1-9]|3[01])$/;
+            let regex_fecha = /^(.+)$/;
+            let regex_correo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             // const regexFecha = /^(0[1-9]|1[0-2])-(0[1-9]|1\d|2\d|3[01])-\d{4}$/;
 
             
@@ -105,6 +112,9 @@ export default {
             }
             if(!regex_nombres.test(this.apellidos)){
                 mensaje += 'Campo -apellidos- no valido. '
+            }
+            if(!regex_correo.test(this.correo)){
+                mensaje += 'Campo -correo- no valido. '
             }
             if(!regex_fecha.test(this.fecha_nacimiento)){
                 mensaje += 'Campo -fecha- no valido. '

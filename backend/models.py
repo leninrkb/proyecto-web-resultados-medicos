@@ -11,6 +11,7 @@ class Persona(Base):
     nombres = Column(String)
     apellidos = Column(String)
     fecha_nacimiento = Column(DATE)
+    correo = Column(String)
     id_genero = Column(Integer)
 
 class Genero(Base):

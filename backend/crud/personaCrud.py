@@ -14,6 +14,7 @@ def createPersona(db:Session, persona:PersonaSchema):
         nombres = persona.nombres,
         apellidos = persona.apellidos,
         fecha_nacimiento = persona.fecha_nacimiento,
+        correo = persona.correo,
         id_genero = persona.id_genero
     )
     db.add(_persona)
@@ -32,6 +33,7 @@ def updatePersona(db:Session, persona:PersonaSchema):
     _persona.nombres = persona.nombres
     _persona.apellidos = persona.apellidos
     _persona.fecha_nacimiento = persona.fecha_nacimiento
+    _persona.correo = persona.correo
     _persona.id_genero = persona.id_genero
     db.commit()
     db.refresh(_persona)

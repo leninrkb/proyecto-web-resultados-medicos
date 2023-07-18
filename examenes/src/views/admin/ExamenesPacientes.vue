@@ -38,6 +38,7 @@ export default {
             this.terminado_examenes = false;
             try {
                 this.personas = await PersonaService.get_personas();
+                console.log(this.personas);
                 this.instituciones = await InstitucionService.get_instituciones();
                 this.estados = await EstadoService.get_estados();
                 this.tabla_examenes.titulos = ['id', 'institucion', 'nombres', 'apellidos','correo', 'estado', 'examen', 'motivo', 'fecha_realiza', 'observacion']

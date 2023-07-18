@@ -84,6 +84,7 @@ export default {
       this.registros = filtrados;
     },
     quitar_filtro(){
+      this.filtro = '';
       this.cargar_tabla();
     },
     emitir_evento() {

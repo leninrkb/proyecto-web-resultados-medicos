@@ -73,11 +73,7 @@
                     </div>
                     <div>
                         <label for=""><strong>Resultado</strong></label><br>
-                        <input class="px-1 rounded-md w-96" type="text" v-model="_resultado">
-                    </div>
-                    <div>
-                        <label for=""><strong>Observacion</strong></label><br>
-                        <input class="px-1 rounded-md w-96" type="text" v-model="_observacion">
+                        <input class="px-1 rounded-md w-96" type="number" min="1" max="30" v-model="_resultado">
                     </div>
                 </div>
                 <br>
@@ -185,6 +181,10 @@ export default {
         },
         agregar_detalle() {
             if (this.tipo_seleccionado.id != undefined) {
+                if(this.validar_resultado(this._resultado)){
+                    this.mensaje_agregar = 'el resultado no puede ser negativo';
+                   return; 
+                }
                 let nuevo_detalle = {};
                 nuevo_detalle.id = 0;
                 nuevo_detalle.id_examen = this._examen.id;
@@ -192,7 +192,7 @@ export default {
                 nuevo_detalle.tipo = this.tipo_seleccionado.tipo;
                 nuevo_detalle.id_tipo = this.tipo_seleccionado.id;
                 nuevo_detalle.resultado = this._resultado;
-                nuevo_detalle.observacion = this._observacion;
+                nuevo_detalle.observacion = this.comprobar_rangos(this._resultado);
                 let fila = this._detalle.find(p => p.id_tipo == nuevo_detalle.id_tipo);
                 if (fila) {
                     this.mensaje_agregar = 'ese tipo de examen ya esta listado';
@@ -201,6 +201,29 @@ export default {
                     this.mensaje_agregar = '';
                 }
             }
+        },
+        comprobar_rangos(valor){
+            if(valor != undefined){
+                let bajo = 4;
+                let normal = 7;
+                let alto = 10;
+                valor = parseFloat(valor);
+                if(valor > 0 && valor <= bajo){
+                    return 'bajo';
+                }else if(valor > bajo && valor <= normal){
+                    return 'normal';
+                }else if(valor > normal){
+                    return 'alto';
+                }
+            }
+            return 'indefinido';
+        },
+        validar_resultado(valor){
+            valor = parseFloat(valor);
+            if(valor < 0 ){
+                return true;
+            } 
+            return false;
         },
         async guardar_detalle(){
             try {

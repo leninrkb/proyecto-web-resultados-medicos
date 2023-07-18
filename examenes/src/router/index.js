@@ -20,6 +20,11 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/resumen',
+    name: 'resumen',
+    component: ResumenView
+  },
+  {
     path: '/registro',
     name: 'registro',
     component: RegistroView
@@ -33,16 +38,6 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginView
-  },
-  {
-    path: '/resumen',
-    name: 'resumen',
-    component: ResumenView
-  },
-  {
-    path: '/resumen/:id',
-    name: 'resumen',
-    component: ResumenView
   },
   {
     path: '/inicio_paciente',

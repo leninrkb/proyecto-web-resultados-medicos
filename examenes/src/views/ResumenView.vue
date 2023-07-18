@@ -3,8 +3,7 @@
         <Toolbar :datos=datos></Toolbar>
         <br>
         <div class="mx-5 sm:mx-24">
-            <DetalleExamen :id_examen="id_examen"></DetalleExamen>
-            este es el resumen
+            <DetalleExamen :id_examen="3"></DetalleExamen>
         </div>
     </div>
 </template>
@@ -21,6 +20,7 @@ export default {
     },
     data() {
         return {
+            id_examen: 1,
             datos:{
                 titulo:'Biolab',
                 enlaces:[ ],
@@ -35,7 +35,7 @@ export default {
                     }
                 ]
             },
-            id_examen: 0
+            
         }
     },
     methods: {
@@ -48,7 +48,7 @@ export default {
         }
     },
     beforeMount() {
-        this.capturar_cifrado();
+        // this.capturar_cifrado();
     },
 }
 </script>

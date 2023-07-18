@@ -25,6 +25,11 @@ const routes = [
     component: ResumenView
   },
   {
+    path: '/resumen/:id',
+    name: 'resumen',
+    component: ResumenView
+  },
+  {
     path: '/registro',
     name: 'registro',
     component: RegistroView

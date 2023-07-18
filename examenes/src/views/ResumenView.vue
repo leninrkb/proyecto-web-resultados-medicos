@@ -3,7 +3,7 @@
         <Toolbar :datos=datos></Toolbar>
         <br>
         <div class="mx-5 sm:mx-24">
-            <DetalleExamen :id_examen="3"></DetalleExamen>
+            <DetalleExamen :id_examen="id_examen"></DetalleExamen>
         </div>
     </div>
 </template>
@@ -48,7 +48,7 @@ export default {
         }
     },
     beforeMount() {
-        // this.capturar_cifrado();
+        this.capturar_cifrado();
     },
 }
 </script>

@@ -8,7 +8,8 @@ import {
     get_examen_id,
     get_tipos_examen,
     get_detalle, 
-    create_examen, create_detalle, delete_examen
+    create_examen, create_detalle, delete_examen,
+    get_usuario
 } from './rutas';
 
 export const InstitucionService = {
@@ -157,6 +158,18 @@ export const DetalleExamenService = {
             let resp = await axios.post(create_detalle,{
                 parameter: detalle
             });
+            return resp.data.result;
+        } catch (error) {
+            return false;
+        }
+    },
+};
+
+
+export const UsuarioService = {
+    async get(id) {
+        try {
+            let resp = await axios.get(get_usuario + id);
             return resp.data.result;
         } catch (error) {
             return false;

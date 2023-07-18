@@ -11,6 +11,7 @@ import ResumenView from '../views/ResumenView.vue';
 import FormExamen from '../components/FormExamen.vue'
 import FormDetalle from '../components/FormDetalle.vue'
 import EliminarExamen from '../components/EliminarExamen.vue'
+import InicioPaciente from '../views/paciente/InicioPaciente.vue'
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
     path: '/resumen/:id',
     name: 'resumen',
     component: ResumenView
+  },
+  {
+    path: '/inicio_paciente',
+    name: 'inicio_paciente',
+    component: InicioPaciente
   },
   {
     path: '/inicio',

@@ -28,7 +28,7 @@
 <script>
 import FormUsuario from '@/components/FormUsuario.vue';
 import Toolbar from '@/components/ui/Toolbar.vue';
-import {registro, examenes_disponibles, home, inicio_admin} from '../variables/rutas';
+import {registro, examenes_disponibles, home, inicio_admin, inicio_paciente} from '../variables/rutas';
 import Card from '@/components/ui/Card.vue';
 import { arrows_rotate } from "../variables/svg";
 import { autenticar } from '../variables/rutas';
@@ -85,6 +85,7 @@ export default {
             })
             .then(resp => {
                 let usuario = resp.data.result;
+                // console.log(usuario);
                 if(usuario != false){
                     this.mensaje = 'autenticado';
                     this.validar_tipo_usuario(usuario)
@@ -103,7 +104,9 @@ export default {
                 this.sesion.nuevaSesion(usuario);
                 this.$router.push(inicio_admin);
             }else if(usuario.id_rol == 2){
-                console.log('entra paciente');
+                console.log(usuario);
+                this.sesion.nuevaSesion(usuario);
+                this.$router.push(inicio_paciente);
             }
         }
     },

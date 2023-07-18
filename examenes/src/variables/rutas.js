@@ -4,6 +4,8 @@ export const examenes_disponibles = '/examenes_disponibles';
 export const login = '/login';
 export const resumen = 'http://localhost:8080/resumen/';
 
+
+
 // admin
 export const inicio_admin = '/inicio';
 export const examenes_pacientes = inicio_admin + '/examenes';
@@ -12,6 +14,15 @@ export const administrar = inicio_admin + '/administrar';
     export const nuevo_detalle = administrar + '/nuevo_detalle';
     export const eliminar_examen = administrar + '/eliminar_examen';
 export const pacientes = inicio_admin + '/pacientes';
+
+
+
+
+//paciente
+export const inicio_paciente = '/inicio_paciente';
+
+
+
 
 //api
 export const get_generos = 'http://127.0.0.1:8000/genero/get/';
@@ -30,3 +41,4 @@ export const get_detalle = 'http://127.0.0.1:8000/detalle/get/';
 export const create_examen = 'http://127.0.0.1:8000/examen/create';
 export const create_detalle = 'http://127.0.0.1:8000/detalle/create';
 export const delete_examen = 'http://127.0.0.1:8000/examen/delete/';
+export const get_usuario = 'http://127.0.0.1:8000/usuatio/get/';

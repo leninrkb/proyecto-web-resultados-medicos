@@ -2,7 +2,7 @@ export const home = '/';
 export const registro = '/registro';
 export const examenes_disponibles = '/examenes_disponibles';
 export const login = '/login';
-export const resumen = 'http://localhost:8080/resumen/';
+export const resumen = 'https://examenes-biolab.onrender.com/resumen/';
 
 
 
@@ -25,7 +25,7 @@ export const inicio_paciente = '/inicio_paciente';
 
 
 //api
-const sitio = 'http://127.0.0.1:8000';
+const sitio = 'https://api-servicios-xprm.onrender.com';
 export const get_generos = sitio + '/genero/get/';
 export const create_persona = sitio + '/persona/create';
 export const create_usuario = sitio + '/usuario/create';

@@ -7,11 +7,12 @@ import InicioView from '../views/admin/InicioView.vue'
 import ExamenesPacientes from '../views/admin/ExamenesPacientes.vue'
 import AdministrarExamenes from '../views/admin/AdministrarExamenes.vue'
 import Pacientes from '../views/admin/Pacientes.vue'
-import ResumenView from '../views/ResumenView.vue';
+import ResumenView from '../views/ResumenView.vue'
 import FormExamen from '../components/FormExamen.vue'
 import FormDetalle from '../components/FormDetalle.vue'
 import EliminarExamen from '../components/EliminarExamen.vue'
 import InicioPaciente from '../views/paciente/InicioPaciente.vue'
+import PdfView from '../views/PdfView.vue';
 
 const routes = [
   {
@@ -35,10 +36,18 @@ const routes = [
     component: LoginView
   },
   {
-    path: '/resumen/:id',
-    name: 'resumen',
-    component: ResumenView
+    path: '/pdf',
+    name: 'pdf',
+    component: PdfView,
+    children:[
+      {
+        path: 'resumen/:id',
+        name: 'resumen',
+        component: ResumenView
+      },
+    ]
   },
+
   {
     path: '/inicio_paciente',
     name: 'inicio_paciente',

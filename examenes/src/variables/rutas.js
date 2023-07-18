@@ -2,7 +2,7 @@ export const home = '/';
 export const registro = '/registro';
 export const examenes_disponibles = '/examenes_disponibles';
 export const login = '/login';
-export const resumen = 'https://examenes-test.onrender.com/resumen/';
+export const resumen = 'https://examenes-biolab.onrender.com/resumen/';
 
 
 

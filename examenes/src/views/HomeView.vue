@@ -4,7 +4,6 @@
         <br>
         <div class="mx-5 sm:mx-24">
             <div class="p-3 text-gray-200 text-xl font-sans ">
-                {{$route.params.id}}
                 <h2 class="text-4xl font-sans">Somos <strong>{{institucion.institucion}}</strong></h2>
                 <img class="rounded-lg m-2" :src="institucion.path_img" alt="logo">
                 <h3>{{institucion.razon_social}}</h3>

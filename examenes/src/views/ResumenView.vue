@@ -20,7 +20,6 @@ export default {
     },
     data() {
         return {
-            id_examen: 1,
             datos:{
                 titulo:'Biolab',
                 enlaces:[ ],
@@ -35,16 +34,16 @@ export default {
                     }
                 ]
             },
-            
+            id_examen: 0
         }
     },
     methods: {
         capturar_cifrado(){
             let cifrado = this.$route.params.id;
             let descifrado = descifrar(cifrado, 'examenes');
-            // this.id_examen = JSON.parse(descifrado);
+            //this.id_examen = JSON.parse(descifrado);
             this.id_examen = descifrado;
-            console.log(this.id_examen);
+            console.log(this.id_examen)
         }
     },
     beforeMount() {

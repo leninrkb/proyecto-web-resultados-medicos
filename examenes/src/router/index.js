@@ -7,7 +7,7 @@ import InicioView from '../views/admin/InicioView.vue'
 import ExamenesPacientes from '../views/admin/ExamenesPacientes.vue'
 import AdministrarExamenes from '../views/admin/AdministrarExamenes.vue'
 import Pacientes from '../views/admin/Pacientes.vue'
-import ResumenView from '../views/ResumenView.vue'
+import ResumenView from '../views/ResumenView.vue';
 import FormExamen from '../components/FormExamen.vue'
 import FormDetalle from '../components/FormDetalle.vue'
 import EliminarExamen from '../components/EliminarExamen.vue'
@@ -18,16 +18,6 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
-  },
-  {
-    path: '/resumen',
-    name: 'resumen',
-    component: ResumenView
-  },
-  {
-    path: '/resumen/:id',
-    name: 'resumen',
-    component: ResumenView
   },
   {
     path: '/registro',
@@ -43,6 +33,16 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginView
+  },
+  {
+    path: '/resumen',
+    name: 'resumen',
+    component: ResumenView
+  },
+  {
+    path: '/resumen/:id',
+    name: 'resumen',
+    component: ResumenView
   },
   {
     path: '/inicio_paciente',

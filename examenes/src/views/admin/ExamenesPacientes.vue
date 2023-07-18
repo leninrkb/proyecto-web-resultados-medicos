@@ -40,12 +40,13 @@ export default {
                 this.personas = await PersonaService.get_personas();
                 this.instituciones = await InstitucionService.get_instituciones();
                 this.estados = await EstadoService.get_estados();
-                this.tabla_examenes.titulos = ['id', 'institucion', 'nombres', 'apellidos', 'estado', 'examen', 'motivo', 'fecha_realiza', 'observacion']
+                this.tabla_examenes.titulos = ['id', 'institucion', 'nombres', 'apellidos','correo', 'estado', 'examen', 'motivo', 'fecha_realiza', 'observacion']
                 this.tabla_examenes.registros = await ExamenService.get_examenes();
                 this.tabla_examenes.registros.forEach(element => {
                     let temp = this.personas.find(p => p.id == element.id_persona);
                     element.nombres = temp.nombres;
                     element.apellidos = temp.apellidos;
+                    element.correo = temp.correo;
                     temp = this.instituciones.find(p => p.id == element.id_institucion);
                     element.institucion = temp.institucion;
                     temp = this.estados.find(p => p.id == element.id_estado);

@@ -3,13 +3,13 @@
         <Toolbar :datos=datos></Toolbar>
         <br>
         <div class="mx-5 sm:mx-24">
-            <!-- <DetalleExamen :id_examen="id_examen"></DetalleExamen> -->
+            <DetalleExamen :id_examen="id_examen"></DetalleExamen>
             este es el resumen
         </div>
     </div>
 </template>
 <script>
-// import DetalleExamen from '../components/DetalleExamen.vue';
+import DetalleExamen from '../components/DetalleExamen.vue';
 import Toolbar from '@/components/ui/Toolbar.vue';
 import {registro, login} from '../variables/rutas';
 import { descifrar } from '../variables/funciones';
@@ -17,7 +17,7 @@ import { descifrar } from '../variables/funciones';
 export default {
     name:'ResumenView',
     components:{
-        Toolbar, // DetalleExamen
+        Toolbar, DetalleExamen
     },
     data() {
         return {

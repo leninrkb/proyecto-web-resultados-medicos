@@ -12,7 +12,6 @@ import FormExamen from '../components/FormExamen.vue'
 import FormDetalle from '../components/FormDetalle.vue'
 import EliminarExamen from '../components/EliminarExamen.vue'
 import InicioPaciente from '../views/paciente/InicioPaciente.vue'
-import PdfView from '../views/PdfView.vue';
 
 const routes = [
   {
@@ -36,18 +35,15 @@ const routes = [
     component: LoginView
   },
   {
-    path: '/pdf',
-    name: 'pdf',
-    component: PdfView,
-    children:[
-      {
-        path: 'resumen/:id',
-        name: 'resumen',
-        component: ResumenView
-      },
-    ]
+    path: '/resumen',
+    name: 'resumen',
+    component: ResumenView
   },
-
+  {
+    path: '/resumen/:id',
+    name: 'resumen',
+    component: ResumenView
+  },
   {
     path: '/inicio_paciente',
     name: 'inicio_paciente',

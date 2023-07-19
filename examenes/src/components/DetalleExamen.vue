@@ -139,7 +139,7 @@
                     <img class="rounded-lg" :src="qr_url" alt="qr">
                 </div>
             </div> 
-        </div>
+    </div>
     
 </template>
 <script>
@@ -175,7 +175,8 @@ export default {
             tipo_examen: {},
             detalle: [],
             qr_url: '',
-            generando_pdf: false
+            generando_pdf: false,
+            url_componente: ''
 
         }
     },
@@ -205,9 +206,9 @@ export default {
             let ctx = this;
             datos = JSON.stringify(datos);
             datos = cifrar(datos, 'examenes');
-            let url_componente = resumen + datos;
-            console.log(url_componente);
-            qrcode.toDataURL(url_componente, function (err, url) {
+            this.url_componente = resumen + datos;
+            console.log(this.url_componente);
+            qrcode.toDataURL(this.url_componente, function (err, url) {
                 ctx.qr_url = url;
             });
 
@@ -241,6 +242,7 @@ export default {
                 datos_detalle.persona = this.persona;
                 datos_detalle.institucion = this.institucion;
                 datos_detalle.detalle = this.detalle;
+                datos_detalle.url = this.url_componente;
                 this.$emit('detalle',JSON.stringify(datos_detalle));
             } catch (error) {
                 console.log(error);

@@ -50,7 +50,7 @@
         <div v-if="mostrar_eliminar">
             <button class="bg-red-600 p-2 rounded-lg active:bg-red-800" @click="eliminar">Eliminar Examen</button>
         </div>
-        <div v-else>
+        <div v-if="!mostrar_eliminar">
             <label class="italic" for=""><strong>Seleccione un examen para poder eliminarlo</strong></label>
         </div>
         <br>

@@ -10,19 +10,53 @@
         <button class="rounded-md bg-red-600 p-1 text-gray-100 hover:bg-red-700" @click="mostrar_detalle = !mostrar_detalle">Cerrar</button>
     </div>
     <DetalleExamen v-if="mostrar_detalle" :id_examen="fila.id" @detalle="capturar_detalle"></DetalleExamen>
+    <div v-if="mostrar_detalle" class="text-gray-200">
+        <Card class="text-gray-800">
+            <form  ref="form" @submit.prevent="sendEmail" >
+                <div class="flex flex-wrap gap-2">
+                    <div>
+                        <label><strong>Desde</strong></label><br>
+                        <input  class="rounded-md px-2" type="text" name="from_name" v-model="institucion.institucion">
+                    </div>
+                    <div>
+                        <label><strong>Para</strong></label><br>
+                        <input  class="rounded-md px-2" type="email" name="to_email" v-model="persona.correo">
+                    </div>
+                    <div>
+                        <label><strong>URL</strong></label><br>
+                        <input  class="rounded-md px-2" name="message" v-model="url">
+                    </div>
+                </div>
+                <br>
+                <input v-if="!enviando" class="rounded-md bg-blue-600 p-1 text-gray-100 active:bg-blue-800"  type="submit" value="Enviar">
+                <div v-else class="w-8 h-8 p-2 animate-spin bg-gray-300 rounded-full">
+                    <img :src="arrows_rotate" alt="arrows rotate">
+                </div>
+                <p class="italic">
+                    <strong>{{mensaje_enviado}}</strong>
+                </p>
+            </form>
+        </Card>
+    </div>
+    
+
 </template>
 <script>
 import Tabla from '@/components/ui/Tabla.vue';
 import DetalleExamen from '../../components/DetalleExamen.vue';
 import { InstitucionService, EstadoService, PersonaService, ExamenService } from '../../variables/servicios';
 import { examen } from '../../variables/examen';
+import emailjs from '@emailjs/browser';
+import Card from '../../components/ui/Card.vue';
+import { arrows_rotate} from '../../variables/svg';
 export default {
     name: 'ExamenesPacientes',
     components: {
-        Tabla, DetalleExamen
+        Tabla, DetalleExamen, Card
     },
     data() {
         return {
+            arrows_rotate,
             tabla_examenes: { titulos: undefined, registros: undefined },
             terminado_examenes: false,
             personas: undefined,
@@ -30,10 +64,30 @@ export default {
             estados: undefined,
             fila: {},
             mostrar_detalle: false,
-            examen: examen()
+            examen: examen(),
+            url: '',
+            institucion: { institucion: '' },
+            persona: { correo: '' },
+            enviando: false,
+            mensaje_enviado: ''
         }
     },
     methods: {
+        sendEmail() {
+            this.mensaje_enviado = ''
+            this.enviando = true;
+            emailjs.sendForm('service_2gt20zb', 'template_654ouel', this.$refs.form, '2JAqEz9uTrOlanGrJ')
+                .then((result) => {
+                    console.log('SUCCESS!', result.text);
+                    this.mensaje_enviado = 'Correo Enviado!'
+                    this.enviando = false;
+
+                }, (error) => {
+                    console.log('FAILED...', error.text);
+                    this.mensaje_enviado = 'Fallo al enviar'
+                    this.enviando = false;
+                });
+        },
         async cargar_examenes() {
             this.terminado_examenes = false;
             try {
@@ -41,7 +95,7 @@ export default {
                 console.log(this.personas);
                 this.instituciones = await InstitucionService.get_instituciones();
                 this.estados = await EstadoService.get_estados();
-                this.tabla_examenes.titulos = ['id', 'institucion', 'nombres', 'apellidos','correo', 'estado', 'examen', 'motivo', 'fecha_realiza', 'observacion']
+                this.tabla_examenes.titulos = ['id', 'institucion', 'nombres', 'apellidos', 'correo', 'estado', 'examen', 'motivo', 'fecha_realiza', 'observacion']
                 this.tabla_examenes.registros = await ExamenService.get_examenes();
                 this.tabla_examenes.registros.forEach(element => {
                     let temp = this.personas.find(p => p.id == element.id_persona);
@@ -53,7 +107,7 @@ export default {
                     temp = this.estados.find(p => p.id == element.id_estado);
                     element.estado = temp.estado;
                 });
-            } catch (error) {  }
+            } catch (error) { }
             this.terminado_examenes = true;
         },
         recargar() {
@@ -63,12 +117,15 @@ export default {
             this.mostrar_detalle = true;
             this.fila = fila;
         },
-        capturar_detalle(detalle){
+        capturar_detalle(detalle) {
             detalle = JSON.parse(detalle);
             this.examen.setExamen(detalle.examen);
             this.examen.setDetalle(detalle.detalle);
             this.examen.setPersona(detalle.persona);
             this.examen.setInstitucion(detalle.institucion);
+            this.institucion = detalle.institucion;
+            this.persona = detalle.persona;
+            this.url = detalle.url;
             // console.log(detalle);
         }
     },

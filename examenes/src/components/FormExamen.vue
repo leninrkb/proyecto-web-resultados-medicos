@@ -4,7 +4,6 @@
             <button class="bg-green-600 rounded-lg p-1 active:bg-green-800" @click="cargar_examen">Cargar examen</button>
             <button class="bg-green-600 rounded-lg p-1 active:bg-green-800" @click="guardar_borrador">Guardar borrador</button>
         </div>
-        <form v-if="!guardando_examen" action="">
             <Card class="text-gray-800 font-sans">
                 <label class="text-green-600" for=""><strong>Datos de la persona</strong></label>
                 <div class="flex flex-wrap gap-4">
@@ -47,25 +46,25 @@
                     </div>
                     <div>
                         <label for=""><strong>Fecha de ingreso</strong></label><br>
-                        <input class="px-1 rounded-md" type="date" v-model="_examen.fecha_realiza">
+                        <input class="px-1 rounded-md" type="date" required="true"  v-model="_examen.fecha_realiza">
                     </div>
                     <div>
                         <label for=""><strong>Observacion</strong></label><br>
-                        <textarea class="px-1 rounded-md sm:w-80" placeholder="pendiente" v-model="_examen.observacion" rows="3" maxlength="500"></textarea>
+                        <textarea class="px-1 rounded-md sm:w-80"  v-model="_examen.observacion" rows="3" maxlength="500"></textarea>
                     </div>
                 </div>
                 <br>
-                <div class="text-gray-200">
+                <div v-if="!guardando_examen" class="text-gray-200">
                     <button type="submit" class="bg-cyan-500 rounded-lg p-1 active:bg-cyan-800" @click="guardar_examen">Guardar nuevo examen</button>
                 </div>
+                <div v-else class="w-9 h-9 animate-spin p-2 bg-gray-300 rounded-full">
+                    <img :src="arrows_rotate" alt="arrows rotate">
+                </div>
+                <br>
                 <div class="italic">
                     <p><strong>{{mensaje_examen}}</strong></p>
                 </div>
             </Card>
-        </form>
-        <div v-else class="w-10 h-10 animate-spin p-2 bg-gray-300 rounded-full">
-            <img :src="arrows_rotate" alt="arrows rotate">
-        </div>
     </div>
 </template>
 <script>
@@ -120,23 +119,46 @@ export default {
             this.examen.setDetalle(this._detalle);
         },
         async guardar_examen(){
-            this.guardando_examen = true;
-            let nuevo = {};
-            nuevo.id = 0;
-            nuevo.id_institucion = this._id_institucion;
-            nuevo.id_estado = this._id_estado;
-            nuevo.id_persona = this._persona.id;
-            nuevo.examen = this._examen.examen;
-            nuevo.motivo = this._examen.motivo;
-            nuevo.fecha_realiza = this._examen.fecha_realiza;
-            nuevo.observacion = this._examen.observacion ?? 'pendiente';
-            console.log(nuevo);
-            await ExamenService.create_examen(nuevo).then(resp => {
-                this.mensaje_examen = 'examen guardado!';
-            }).catch(error => {
-                this.mensaje_examen = error;
-            });
-            this.guardando_examen = false;
+            try {
+                this.mensaje_examen = '';
+                if(this._persona.id != -1){
+                    if(this.validar_campos()){
+                        this.guardando_examen = true;
+                        let nuevo = {};
+                        nuevo.id = 0;
+                        nuevo.id_institucion = this._id_institucion;
+                        nuevo.id_estado = this._id_estado;
+                        nuevo.id_persona = this._persona.id;
+                        nuevo.examen = this._examen.examen;
+                        nuevo.motivo = this._examen.motivo ?? '-';
+                        nuevo.fecha_realiza = this._examen.fecha_realiza;
+                        nuevo.observacion = this._examen.observacion ?? '-';
+                        await ExamenService.create_examen(nuevo).then(resp => {
+                            this.mensaje_examen = 'examen guardado!';
+                            this.examen.setExamen(resp);
+                        }).catch(error => {
+                            this.mensaje_examen = error;
+                        });
+                        this.guardando_examen = false;
+                    }
+                }else{
+                    this.mensaje_examen = 'seleccione una paciente';
+                }
+            } catch (error) {
+                console.log(error);
+             }
+        },
+        validar_campos(){
+            let regex = /^(.+)$/;
+            if(!regex.test(this._examen.examen)){
+                this.mensaje_examen += 'Ingrese un titulo. '
+                return false;
+            }
+            if(!regex.test(this._examen.fecha_realiza)){
+                this.mensaje_examen += 'Indique la fecha. '
+                return false;
+            }
+            return true;
         },
         capturar_evento(tipo, id){
             this[tipo] = id;
